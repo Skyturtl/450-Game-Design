@@ -15,19 +15,19 @@ public class Controller : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += new Vector3(0, 0.2f, 0);
+            transform.position += new Vector3(0, 8 * Time.deltaTime, 0);
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position += new Vector3(0, -0.2f, 0);
+            transform.position += new Vector3(0, -8 * Time.deltaTime, 0);
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += new Vector3(-0.2f, 0, 0);
+            transform.position += new Vector3(-8 * Time.deltaTime, 0, 0);
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += new Vector3(0.2f, 0, 0);
+            transform.position += new Vector3(8 * Time.deltaTime, 0, 0);
         }
     }
 }
