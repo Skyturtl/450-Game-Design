@@ -4,10 +4,23 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
+
+    //Outlet
+    public GameObject projectilePrefab;
+    public Transform aimPivot;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        InvokeRepeating("Shoot", 0f, 0.25f); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+    }
+
+    //Shoot called every half-second
+    void Shoot()
+    {
+        GameObject newProjectile = Instantiate(projectilePrefab);
+        newProjectile.transform.position = transform.position;
+        newProjectile.transform.rotation = aimPivot.rotation;
     }
 
     // Update is called once per frame
@@ -29,5 +42,16 @@ public class Controller : MonoBehaviour
         {
             transform.position += new Vector3(8 * Time.deltaTime, 0, 0);
         }
+
+        //Mouse Aiming
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector3 directionFromPlayerToMouse = mousePositionInWorld - transform.position;
+
+        float radiansToMouse = Mathf.Atan2(directionFromPlayerToMouse.y, directionFromPlayerToMouse.x);
+        float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
+
+        aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
+
     }
 }
