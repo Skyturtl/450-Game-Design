@@ -4,32 +4,40 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public Transform Player;
+    private Transform target;
     public float ChaseSpeed = 6;
     public float AggroDistance = 12;
     public double StopDistance = 0.5;
+    public PlayerHealth pHealth;
+    public float damage;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        target = player.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector2.Distance(transform.position, Player.position);
+        float distance = Vector2.Distance(transform.position, target.position);
 
         if(distance > AggroDistance){
-            Debug.Log("Out of range");
             return;
         }
             
         if(distance <= StopDistance){
-            Debug.Log("Touching");
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, Player.position, ChaseSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, target.position, ChaseSpeed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject == target.gameObject){
+            target.GetComponent<PlayerHealth>().takeDamage(damage);
+        }
     }
 }
