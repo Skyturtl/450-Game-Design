@@ -4,60 +4,24 @@ using UnityEngine;
 
 public class RandomSpawner : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
-    private Transform target;
+    [SerializeField] private float spawnRate = 1f;
 
-    public float timeToSpawn = 1f;
-    private float spawnCounter;
+    [SerializeField] private GameObject[] enemyPrefabs;
 
-    public Transform minSpawn, maxSpawn;
-
-
+    [SerializeField] private bool canSpawn = true;
     // Start is called before the first frame update
     private void Start()
     {
-        spawnCounter = timeToSpawn;
-
-        target = PlayerHealth.instance.transform;
+        StartCoroutine(Spawner());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        spawnCounter -= Time.deltaTime;
-        if(spawnCounter <= 0){
+    private IEnumerator Spawner(){
+        WaitForSeconds wait = new WaitForSeconds(spawnRate);
+        while(canSpawn){
+            yield return wait;
             int randomIndex = Random.Range(0, enemyPrefabs.Length);
-            Instantiate(enemyPrefabs[randomIndex], SelectSpawnPoint()   , Quaternion.identity);
-            spawnCounter = timeToSpawn;
+            GameObject enemyToSpawn = enemyPrefabs[randomIndex];
+            Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
         }
-
-        transform.position = target.position;
-    }
-
-    public Vector3 SelectSpawnPoint(){
-        Vector3 spawnPoint = Vector3.zero;
-
-        bool spawnVerticalEdge = Random.Range(0f , 1f) > 0.5f;
-
-        if(spawnVerticalEdge){
-            spawnPoint.y = Random.Range(minSpawn.position.y, maxSpawn.position.y);
-
-            if(Random.Range(0f, 1f) > 0.5f){
-                spawnPoint.x = minSpawn.position.x;
-            }else{
-                spawnPoint.x = maxSpawn.position.x;
-            }
-        }
-        else{
-            spawnPoint.x = Random.Range(minSpawn.position.x, maxSpawn.position.x);
-
-            if(Random.Range(0f, 1f) > 0.5f){
-                spawnPoint.y = minSpawn.position.y;
-            }else{
-                spawnPoint.y = maxSpawn.position.y;
-            }
-
-        }
-        return spawnPoint;
     }
 }
