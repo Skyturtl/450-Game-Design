@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6553089457771500186}
   - component: {fileID: 6115162317997178009}
+  - component: {fileID: 785045433202663882}
   - component: {fileID: 6643932462411264833}
   m_Layer: 0
   m_Name: Player 1
@@ -85,6 +86,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &785045433202663882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6447571288659559203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d577e4f9c90f9d49aa4b33f66bb2fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 10
+  maxHealth: 10
+  healthBar: {fileID: 0}
 --- !u!114 &6643932462411264833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +110,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6447571288659559203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd198b65be87d0b44b4bcbad4e98bf7c, type: 3}
+  m_Script: {fileID: 11500000, guid: e465946bcb12a2a41ae92ab4f7081853, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 0}
+  aimPivot: {fileID: 0}

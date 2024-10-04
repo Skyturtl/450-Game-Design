@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject == target.gameObject){
+        if(other.gameObject.GetComponent<Controller>()){
             target.GetComponent<PlayerHealth>().takeDamage(damage);
         }
     }
