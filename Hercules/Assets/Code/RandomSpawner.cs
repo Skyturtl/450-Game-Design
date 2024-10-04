@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class RandomSpawner : MonoBehaviour
 {
-    public Transform[] spawnPoints;
-    public GameObject[] enemyPrefabs;
+    [SerializeField] private float spawnRate = 1f;
+
+    [SerializeField] private GameObject[] enemyPrefabs;
+
+    [SerializeField] private bool canSpawn = true;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        StartCoroutine(Spawner());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            int randomSpawn = Random.Range(0, spawnPoints.Length);
-            int randomEnemy = Random.Range(0, enemyPrefabs.Length);
-            Instantiate(enemyPrefabs[randomEnemy], spawnPoints[randomSpawn].position, Quaternion.identity);
+    private IEnumerator Spawner(){
+        WaitForSeconds wait = new WaitForSeconds(spawnRate);
+        while(canSpawn){
+            yield return wait;
+            int randomIndex = Random.Range(0, enemyPrefabs.Length);
+            GameObject enemyToSpawn = enemyPrefabs[randomIndex];
+            Instantiate(enemyToSpawn, transform.position, Quaternion.identity);
         }
     }
 }
