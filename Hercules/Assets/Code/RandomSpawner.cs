@@ -12,8 +12,9 @@ public class RandomSpawner : MonoBehaviour
 
     public Transform minSpawn, maxSpawn;
 
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         spawnCounter = timeToSpawn;
 
@@ -55,6 +56,7 @@ public class RandomSpawner : MonoBehaviour
             }else{
                 spawnPoint.y = maxSpawn.position.y;
             }
+
         }
         return spawnPoint;
     }
