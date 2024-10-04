@@ -16,14 +16,11 @@ public class Projectile : MonoBehaviour
         _rigidbody2D.velocity = transform.right * 20f;
     }
     
-    private void OnCollisionEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Hit: " + other.name);
-        if(other.gameObject.CompareTag("Enemy")){
-            other.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount);
-            if(other.gameObject.GetComponent<Enemy>().health <= 0){
-                Destroy(other.gameObject);
-            }
+        Destroy(gameObject);
+        if(collision.gameObject.CompareTag("Enemy")){
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount);
             Destroy(gameObject);
         }
     }
