@@ -1714,7 +1714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282057962}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Aim (Invisible)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,7 +2568,7 @@ GameObject:
   - component: {fileID: 479757623}
   - component: {fileID: 479757627}
   - component: {fileID: 479757628}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120239,7 +120239,7 @@ GameObject:
   - component: {fileID: 900651505}
   - component: {fileID: 900651507}
   - component: {fileID: 900651506}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Pausescreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123611,7 +123611,7 @@ GameObject:
   - component: {fileID: 1593085514}
   - component: {fileID: 1593085513}
   - component: {fileID: 1593085512}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123911,7 +123911,7 @@ GameObject:
   - component: {fileID: 1640255248}
   - component: {fileID: 1640255250}
   - component: {fileID: 1640255249}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124263,7 +124263,7 @@ GameObject:
   - component: {fileID: 1725292381}
   - component: {fileID: 1725292383}
   - component: {fileID: 1725292382}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130596,7 +130596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3892366610287559748}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Aim Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130619,7 +130619,7 @@ GameObject:
   - component: {fileID: 207980753285779716}
   - component: {fileID: 207980753285779718}
   - component: {fileID: 207980753285779717}
-  m_Layer: 6
+  m_Layer: 18
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
