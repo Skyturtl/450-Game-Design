@@ -8,10 +8,13 @@ public class Controller : MonoBehaviour
     //Outlet
     public GameObject projectilePrefab;
     public Transform aimPivot;
+    SpriteRenderer sprite;
+    public float speed;
 
     // Start is called before the first frame update
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         InvokeRepeating("Shoot", 0f, 0.25f); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
 
@@ -26,21 +29,23 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W)) //up
         {
-            transform.position += new Vector3(0, 8 * Time.deltaTime, 0);
+            transform.position += new Vector3(0, speed * Time.deltaTime, 0);
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S)) //down
         {
-            transform.position += new Vector3(0, -8 * Time.deltaTime, 0);
+            transform.position += new Vector3(0, -speed * Time.deltaTime, 0);
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A)) //left
         {
-            transform.position += new Vector3(-8 * Time.deltaTime, 0, 0);
+            sprite.flipX = false;
+            transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D)) //right
         {
-            transform.position += new Vector3(8 * Time.deltaTime, 0, 0);
+            sprite.flipX = true;
+            transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
         }
 
         //Mouse Aiming
