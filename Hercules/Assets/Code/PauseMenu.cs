@@ -42,9 +42,4 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
     }
-    public void Reload()
-    {
-        //Restarts current level
-        Application.LoadLevel(0);
-    }    
 }
