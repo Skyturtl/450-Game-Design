@@ -5,6 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
+    public float damageAmount = 5f;
     //Outlets
     Rigidbody2D _rigidbody2D;
 
@@ -15,8 +16,11 @@ public class Projectile : MonoBehaviour
         _rigidbody2D.velocity = transform.right * 20f;
     }
     
-    void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Enemy")){
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount);
+        }
         Destroy(gameObject);
     }
 }
