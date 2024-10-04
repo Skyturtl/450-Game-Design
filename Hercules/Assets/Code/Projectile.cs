@@ -18,10 +18,9 @@ public class Projectile : MonoBehaviour
     
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
         if(collision.gameObject.CompareTag("Enemy")){
             collision.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount);
-            Destroy(gameObject);
         }
+        Destroy(gameObject);
     }
 }
