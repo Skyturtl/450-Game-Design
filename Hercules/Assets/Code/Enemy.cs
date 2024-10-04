@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     public double StopDistance = 0.5;
     public PlayerHealth pHealth;
     public float damage;
+    public float health = 10f;
+    public float hitWaitTime = 1f;
+    private float hitCounter;
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +35,24 @@ public class Enemy : MonoBehaviour
         }
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, ChaseSpeed * Time.deltaTime);
+
+        if(hitCounter > 0f){
+            hitCounter -= Time.deltaTime;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if(other.gameObject == target.gameObject){
-            target.GetComponent<PlayerHealth>().takeDamage(damage);
+        if(other.gameObject == target.gameObject && hitCounter <= 0f){
+            PlayerHealth.instance.takeDamage(damage);
+            hitCounter = hitWaitTime;
+        }
+    }
+    
+    public void TakeDamage(float damage){
+        health -= damage;
+        if(health <= 0){
+            Destroy(gameObject);
         }
     }
 }

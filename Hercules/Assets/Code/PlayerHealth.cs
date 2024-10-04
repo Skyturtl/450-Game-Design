@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    public static PlayerHealth instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public float playerHealth;
     public float maxHealth;
     public Image healthBar;
@@ -22,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void takeDamage(float damage){
         playerHealth -= damage;
+        Debug.Log("Player Health: " + playerHealth);
         if(playerHealth <= 0){
             Destroy(gameObject);
         }
