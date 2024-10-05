@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
 
+    public static event Action OnPlayerDeath;
     public static PlayerHealth instance;
 
     private void Awake()
@@ -32,7 +34,8 @@ public class PlayerHealth : MonoBehaviour
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);
         if(playerHealth <= 0){
-            Destroy(gameObject);
+            Debug.Log("Player Dead");
+            OnPlayerDeath?.Invoke();
         }
     }
 }

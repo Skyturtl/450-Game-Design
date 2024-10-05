@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-
     //Outlet
     public GameObject projectilePrefab;
     public Transform aimPivot;
     SpriteRenderer sprite;
     public float speed;
 
+    Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
         InvokeRepeating("Shoot", 0f, 0.25f); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
@@ -22,7 +24,8 @@ public class Controller : MonoBehaviour
     void Shoot()
     {
         GameObject newProjectile = Instantiate(projectilePrefab);
-        newProjectile.transform.position = transform.position;
+        Vector3 offset = aimPivot.right * 0.5f; // Adjust the offset distance as needed
+        newProjectile.transform.position = transform.position + offset;
         newProjectile.transform.rotation = aimPivot.rotation;
     }
 
@@ -57,6 +60,24 @@ public class Controller : MonoBehaviour
         float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
 
         aimPivot.rotation = Quaternion.Euler(0, 0, angleToMouse);
+    }
+    public void OnEnable()
+    {
+        PlayerHealth.OnPlayerDeath += DisablePlayerMovement;
+    }
 
+    public void OnDisable()
+    {      
+        PlayerHealth.OnPlayerDeath -= DisablePlayerMovement;
+    }
+
+    public void DisablePlayerMovement(){
+        Time.timeScale = 0f;
+        enabled = false;
+    }
+
+    public void EnablePlayerMovement(){
+        Time.timeScale = 1f;
+        enabled = true;
     }
 }

@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other)
     {
         if(other.gameObject == target.gameObject && hitCounter <= 0f){
             PlayerHealth.instance.takeDamage(damage);
