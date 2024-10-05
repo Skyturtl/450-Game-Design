@@ -11,6 +11,7 @@ public class TimerUI : MonoBehaviour
     public float timeRemaining = 90f;
     private bool timerIsRunning = false;
     private Collider2D itemCollider;
+    public GameObject gameWonMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,10 @@ public class TimerUI : MonoBehaviour
             {
                 timeRemaining = 0;
                 timerIsRunning = false;
+
+                gameWonMenu.SetActive(true);
+                Time.timeScale = 0f;
+                enabled = false;
 
                 if(itemCollider != null)
                 {
