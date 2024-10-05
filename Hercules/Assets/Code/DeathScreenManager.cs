@@ -28,7 +28,6 @@ public class DeathScreenManager : MonoBehaviour
 
     public void GotoMainMenu()
     {
-        gameOverMenu.SetActive(false);
         SceneManager.LoadScene(0);
     }
 }
