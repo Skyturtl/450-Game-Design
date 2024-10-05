@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 903551105128534853}
   - component: {fileID: 7095226203035424273}
-  - component: {fileID: -2673172509727901914}
   - component: {fileID: -8030220037841402258}
   - component: {fileID: -1880815613869166911}
+  - component: {fileID: 2104880249120453294}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Enemy
@@ -76,9 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224,
-    type: 3}
-  m_Color: {r: 0, g: 0.27792883, b: 1, a: 1}
+  m_Sprite: {fileID: 1298208156, guid: 18f0354e894ae4647b4a0beb103152c3, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -88,8 +87,55 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &-2673172509727901914
-PolygonCollider2D:
+--- !u!114 &-8030220037841402258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638585684422193235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChaseSpeed: 6
+  AggroDistance: 100
+  StopDistance: 0
+  pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
+    type: 3}
+  damage: 10
+  health: 20
+  hitWaitTime: 1
+--- !u!50 &-1880815613869166911
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638585684422193235}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &2104880249120453294
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,63 +169,13 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.5180466, y: 2.9765625}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
-  m_UseDelaunayMesh: 0
---- !u!114 &-8030220037841402258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8638585684422193235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChaseSpeed: 6
-  AggroDistance: 100
-  StopDistance: 0
-  pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
-    type: 3}
-  damage: 10
-  health: 10
-  hitWaitTime: 1
---- !u!50 &-1880815613869166911
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8638585684422193235}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  serializedVersion: 2
+  m_Size: {x: 3.5180466, y: 2.9765625}
+  m_EdgeRadius: 0

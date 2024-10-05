@@ -13,10 +13,12 @@ public class Enemy : MonoBehaviour
     public float health = 10f;
     public float hitWaitTime = 1f;
     private float hitCounter;
+    SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
     {
+        sprite = GetComponent<SpriteRenderer>();
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
     }
@@ -36,7 +38,16 @@ public class Enemy : MonoBehaviour
 
         transform.position = Vector2.MoveTowards(transform.position, target.position, ChaseSpeed * Time.deltaTime);
 
-        if(hitCounter > 0f){
+        Vector3 direction = gameObject.transform.InverseTransformPoint(target.position);
+        if (direction.x > 0)
+        {
+            sprite.flipX = true;
+        }
+        if (direction.x <= 0) {
+            sprite.flipX = false;
+        }
+
+        if (hitCounter > 0f){
             hitCounter -= Time.deltaTime;
         }
     }
