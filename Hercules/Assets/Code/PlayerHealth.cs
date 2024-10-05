@@ -16,10 +16,13 @@ public class PlayerHealth : MonoBehaviour
     public float playerHealth;
     public float maxHealth;
     public Image healthBar;
+    private SpriteRenderer sprite;
+
     // Start is called before the first frame update
     void Start()
     {
         playerHealth = maxHealth;
+        sprite = gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -32,7 +35,10 @@ public class PlayerHealth : MonoBehaviour
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);
         if(playerHealth <= 0){
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            sprite.enabled = false;
+            gameObject.GetComponent<Controller>().enabled = false;
+            //prompt game over
         }
     }
 }
