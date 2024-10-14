@@ -33,6 +33,15 @@ public class PlayerHealth : MonoBehaviour
         healthBar.fillAmount = Mathf.Clamp(playerHealth / maxHealth, 0, 1);        
     }
 
+    public void heal(int healAmount)
+    {
+        playerHealth += healAmount;
+        if(playerHealth > maxHealth)
+        {
+            playerHealth = maxHealth;
+        }
+        Debug.Log("Healed" + healAmount);
+    }
     public void takeDamage(float damage){
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);

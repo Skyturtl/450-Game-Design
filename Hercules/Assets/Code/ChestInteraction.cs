@@ -6,9 +6,14 @@ public class ChestInteraction : MonoBehaviour
 {
     public Sprite closedChest;
     public Sprite openChest;
+    public GameObject potionPrefab;
+    public Transform spawnPoint;
+    public int potionCount = 1;
+    public float explosionForce = 5f;
     private SpriteRenderer Chest;
     private bool isPlayerNearby = false ;
     private bool isOpen = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +37,20 @@ public class ChestInteraction : MonoBehaviour
             Chest.sprite = openChest;
             isOpen = true;
             Debug.Log("Chest Opened");
+
+            for(int i = 0; i < potionCount; ++i)
+            {
+                GameObject potion = Instantiate(potionPrefab, spawnPoint.position, Quaternion.identity);
+
+                Rigidbody2D rb = potion.GetComponent<Rigidbody2D>();
+
+                if(rb != null)
+                {
+                    Vector2 randomDirection = new Vector2(Random.Range(-1f, 1f), Random.Range(0.5f, 1.5f));
+                    rb.AddForce(randomDirection * explosionForce, ForceMode2D.Impulse);
+
+                }
+            }
         }
     }
 
