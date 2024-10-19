@@ -99,13 +99,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChaseSpeed: 6
-  AggroDistance: 100
+  ChaseSpeed: 3
+  AggroDistance: 60
   StopDistance: 0
   pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
     type: 3}
   damage: 10
-  health: 20
+  health: 30
   hitWaitTime: 1
 --- !u!50 &-1880815613869166911
 Rigidbody2D:
