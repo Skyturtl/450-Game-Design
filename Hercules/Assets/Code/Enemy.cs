@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
     {
         if(other.gameObject == target.gameObject && hitCounter <= 0f){
             PlayerHealth.instance.takeDamage(damage);
+            SoundManager.instance.PlayBite();
             hitCounter = hitWaitTime;
         }
     }
