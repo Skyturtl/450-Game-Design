@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9221547439365541373}
   - component: {fileID: -8474184729414066187}
   - component: {fileID: 2450695920737158715}
+  - component: {fileID: 451013518441351119}
   m_Layer: 24
   m_Name: Circle
   m_TagString: Enemy
@@ -99,6 +100,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 451013518441351119}
+        m_TargetAssemblyTypeName: Knockback, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8994449388776259908}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ChaseSpeed: 9
   AggroDistance: 100
   StopDistance: 0
@@ -107,6 +123,7 @@ MonoBehaviour:
   damage: 10
   health: 5
   hitWaitTime: 1
+  moveTowardsPlayer: 1
 --- !u!50 &-8474184729414066187
 Rigidbody2D:
   serializedVersion: 4
@@ -169,3 +186,48 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.5392674
+--- !u!114 &451013518441351119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994449388776259908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90acd8ffe1ac29e4282a60ba61210e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: -8474184729414066187}
+  strength: 10
+  delay: 0.15
+  OnBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -9221547439365541373}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -9221547439365541373}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

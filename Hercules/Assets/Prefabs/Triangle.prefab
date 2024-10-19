@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8030220037841402258}
   - component: {fileID: -1880815613869166911}
   - component: {fileID: 2104880249120453294}
+  - component: {fileID: 3823452195018013543}
   m_Layer: 24
   m_Name: Triangle
   m_TagString: Enemy
@@ -99,6 +100,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3823452195018013543}
+        m_TargetAssemblyTypeName: Knockback, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8638585684422193235}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   ChaseSpeed: 3
   AggroDistance: 60
   StopDistance: 0
@@ -179,3 +195,48 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.5180466, y: 2.9765625}
   m_EdgeRadius: 0
+--- !u!114 &3823452195018013543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8638585684422193235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90acd8ffe1ac29e4282a60ba61210e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: -1880815613869166911}
+  strength: 30
+  delay: 0.15
+  OnBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8030220037841402258}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8030220037841402258}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

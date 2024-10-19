@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
+    public UnityEvent OnHit;
     private Transform target;
     public float ChaseSpeed = 6;
     public float AggroDistance = 12;
@@ -36,9 +38,10 @@ public class Enemy : MonoBehaviour
             return;
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, target.position, ChaseSpeed * Time.deltaTime);
+        Vector2 direction = target.position - transform.position;
+        direction.Normalize();
+        transform.position += (Vector3)direction * ChaseSpeed * Time.deltaTime;
 
-        Vector3 direction = gameObject.transform.InverseTransformPoint(target.position);
         if (direction.x > 0)
         {
             sprite.flipX = true;
@@ -61,6 +64,7 @@ public class Enemy : MonoBehaviour
     }
     
     public void TakeDamage(float damage){
+        OnHit?.Invoke();
         health -= damage;
         if(health <= 0){
             Destroy(gameObject);
