@@ -8,7 +8,7 @@ public class TimerUI : MonoBehaviour
 {
     public TextMeshProUGUI timerText;
     public GameObject item;
-    public float timeRemaining = 90f;
+    public float timePassed = 0f;
     private bool timerIsRunning = false;
     private Collider2D itemCollider;
     public GameObject gameWonMenu;
@@ -37,26 +37,24 @@ public class TimerUI : MonoBehaviour
     {
         if (timerIsRunning)
         {
-            if(timeRemaining > 0)
-            {
-                timeRemaining -= Time.deltaTime;
+            timePassed += Time.deltaTime;
 
-                DisplayTime(timeRemaining);
-            }
-            else
-            {
-                timeRemaining = 0;
-                timerIsRunning = false;
+            DisplayTime(timePassed);
 
-                gameWonMenu.SetActive(true);
-                Time.timeScale = 0f;
-                enabled = false;
+            // else
+            // {
+            //     timeRemaining = 0;
+            //     timerIsRunning = false;
 
-                if(itemCollider != null)
-                {
-                    itemCollider.enabled = false;
-                }
-            }
+            //     gameWonMenu.SetActive(true);
+            //     Time.timeScale = 0f;
+            //     enabled = false;
+
+            //     if(itemCollider != null)
+            //     {
+            //         itemCollider.enabled = false;
+            //     }
+            // }
         }
     }
 

@@ -7,56 +7,79 @@ public class RandomSpawner : MonoBehaviour
     public GameObject[] enemyPrefabs;
     private Transform target;
 
-    public float timeToSpawn = 1f;
+    public float initialTimeToSpawn = 3f;
     private float spawnCounter;
+    private float timePassed = 0;
 
     public Transform minSpawn, maxSpawn;
-
 
     // Start is called before the first frame update
     private void Start()
     {
-        spawnCounter = timeToSpawn;
-
+        spawnCounter = initialTimeToSpawn;
         target = PlayerHealth.instance.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timePassed += Time.deltaTime;
         spawnCounter -= Time.deltaTime;
-        if(spawnCounter <= 0){
-            int randomIndex = Random.Range(0, enemyPrefabs.Length);
-            Instantiate(enemyPrefabs[randomIndex], SelectSpawnPoint()   , Quaternion.identity);
+
+        // Adjust the timeToSpawn based on timePassed
+        float timeToSpawn = Mathf.Max(0.1f, initialTimeToSpawn - (timePassed / 100));
+
+        if (spawnCounter <= 0)
+        {
+            int random = Random.Range(0, 100);
+            int randomIndex;
+            if(random < 50){
+                randomIndex = 0;
+            }
+            else if(random < 70){
+                randomIndex = 1;
+            }
+            else{
+                randomIndex = 2;
+            }
+            Instantiate(enemyPrefabs[randomIndex], SelectSpawnPoint(), Quaternion.identity);
             spawnCounter = timeToSpawn;
         }
 
         transform.position = target.position;
     }
 
-    public Vector3 SelectSpawnPoint(){
+    public Vector3 SelectSpawnPoint()
+    {
         Vector3 spawnPoint = Vector3.zero;
 
-        bool spawnVerticalEdge = Random.Range(0f , 1f) > 0.5f;
+        bool spawnVerticalEdge = Random.Range(0f, 1f) > 0.5f;
 
-        if(spawnVerticalEdge){
+        if (spawnVerticalEdge)
+        {
             spawnPoint.y = Random.Range(minSpawn.position.y, maxSpawn.position.y);
 
-            if(Random.Range(0f, 1f) > 0.5f){
+            if (Random.Range(0f, 1f) > 0.5f)
+            {
                 spawnPoint.x = minSpawn.position.x;
-            }else{
+            }
+            else
+            {
                 spawnPoint.x = maxSpawn.position.x;
             }
         }
-        else{
+        else
+        {
             spawnPoint.x = Random.Range(minSpawn.position.x, maxSpawn.position.x);
 
-            if(Random.Range(0f, 1f) > 0.5f){
+            if (Random.Range(0f, 1f) > 0.5f)
+            {
                 spawnPoint.y = minSpawn.position.y;
-            }else{
+            }
+            else
+            {
                 spawnPoint.y = maxSpawn.position.y;
             }
-
         }
         return spawnPoint;
     }

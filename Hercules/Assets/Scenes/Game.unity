@@ -481,7 +481,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300128, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.07169801, g: 0.07169801, b: 0.07169801, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3223,7 +3223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1593085512}
   item: {fileID: 1396204866}
-  timeRemaining: 90
+  timePassed: 0
   gameWonMenu: {fileID: 49541095}
 --- !u!114 &479757628
 MonoBehaviour:
@@ -121015,7 +121015,7 @@ MonoBehaviour:
   - {fileID: 8994449388776259908, guid: 0c5b3d98150730540812505abcab8edb, type: 3}
   - {fileID: 414473813388573119, guid: 61358a6600777014fa0aa4740bfc9662, type: 3}
   - {fileID: 8638585684422193235, guid: f6d1f455e91b60b4598e25825e5dafd9, type: 3}
-  timeToSpawn: 1
+  initialTimeToSpawn: 3
   minSpawn: {fileID: 946112954}
   maxSpawn: {fileID: 1158126849}
 --- !u!4 &886026506
