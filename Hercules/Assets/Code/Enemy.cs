@@ -68,7 +68,17 @@ public class Enemy : MonoBehaviour
         OnHitWithReference?.Invoke(projectile);
         health -= damage;
         if(health <= 0){
-            Destroy(gameObject);
+            Die();
         }
     }
+
+    void Die()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        Upgrade upgrade = player.GetComponent<Upgrade>();
+        upgrade.AddKill();
+
+        Destroy(gameObject);
+    }
+    
 }
