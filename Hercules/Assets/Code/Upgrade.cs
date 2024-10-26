@@ -11,7 +11,7 @@ public class Upgrade : MonoBehaviour
     public float maxHealth = 100f;
     public float currentHealth;
 
-    private int killsPerLevel = 10;
+    public int killsPerLevel = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,10 +28,6 @@ public class Upgrade : MonoBehaviour
     {
         KillCount++;
 
-        if(KillCount >= killsPerLevel)
-        {
-            LevelUp();
-        }
     }
 
     public void LevelUp()

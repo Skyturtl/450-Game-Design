@@ -22,11 +22,11 @@ public class RuneUI : MonoBehaviour
         upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
         if(upgrade != null)
         {
-            if(upgrade.KillCount >= 10)
+            if(upgrade.KillCount >= upgrade.killsPerLevel)
             {
                 ShowObject();
             }
-            else if(upgrade.KillCount < 10)
+            else
             {
                 HideObject();
             }
