@@ -13,11 +13,13 @@ public class Knockback : MonoBehaviour
 
     public void PlayFeedback(GameObject sender)
     {
-        Debug.Log("PlayFeedback");
-        Debug.Log(sender);
         StopAllCoroutines();
         OnBegin?.Invoke();
-        Vector2 direction = (transform.position - sender.transform.position).normalized;
+        Vector2 direction = transform.position - sender.transform.position;
+        direction.Normalize();
+        Debug.Log(transform.position);
+        Debug.Log(sender.transform.position);
+        Debug.Log(direction);
         rb2d.AddForce(direction * strength, ForceMode2D.Impulse);
         StartCoroutine(Reset());
     }

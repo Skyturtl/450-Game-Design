@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using System;
 
 public class PlayerHealth : MonoBehaviour
 {
 
+    public UnityEvent<GameObject> OnHitWithReference;
     public static event Action OnPlayerDeath;
     public static PlayerHealth instance;
 
@@ -42,7 +44,11 @@ public class PlayerHealth : MonoBehaviour
         }
         Debug.Log("Healed" + healAmount);
     }
-    public void takeDamage(float damage){
+    public void takeDamage(float damage, GameObject sender){
+        if(sender.name == "Fork(Clone)"){
+            OnHitWithReference?.Invoke(sender);
+            Debug.Log("FORKED");
+        }
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);
         if(playerHealth <= 0){

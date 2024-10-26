@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9221547439365541373}
   - component: {fileID: -8474184729414066187}
   - component: {fileID: 7061561324725001812}
+  - component: {fileID: -2353610898933210490}
   m_Layer: 24
   m_Name: Shark
   m_TagString: Enemy
@@ -99,16 +100,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnHit:
+  OnHitWithReference:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: -2353610898933210490}
         m_TargetAssemblyTypeName: Knockback, Assembly-CSharp
         m_MethodName: PlayFeedback
-        m_Mode: 2
+        m_Mode: 0
         m_Arguments:
-          m_ObjectArgument: {fileID: 8994449388776259908}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -120,7 +121,7 @@ MonoBehaviour:
   pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
     type: 3}
   damage: 20
-  health: 8
+  health: 15
   hitWaitTime: 1
 --- !u!50 &-8474184729414066187
 Rigidbody2D:
@@ -380,3 +381,48 @@ PolygonCollider2D:
       - {x: 1.1851572, y: -1.2379128}
       - {x: 1.1656996, y: -1.1357607}
   m_UseDelaunayMesh: 0
+--- !u!114 &-2353610898933210490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994449388776259908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90acd8ffe1ac29e4282a60ba61210e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb2d: {fileID: -8474184729414066187}
+  strength: 10
+  delay: 0.15
+  OnBegin:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -9221547439365541373}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDone:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -9221547439365541373}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2

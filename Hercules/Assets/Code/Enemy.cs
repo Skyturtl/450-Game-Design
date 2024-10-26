@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Enemy : MonoBehaviour
 {
-    public UnityEvent OnHit;
+    public UnityEvent<GameObject> OnHitWithReference;
     private Transform target;
     public float ChaseSpeed = 6;
     public float AggroDistance = 12;
@@ -58,14 +58,14 @@ public class Enemy : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         if(other.gameObject == target.gameObject && hitCounter <= 0f){
-            PlayerHealth.instance.takeDamage(damage);
+            PlayerHealth.instance.takeDamage(damage, gameObject);
             // SoundManager.instance.PlayBite();
             hitCounter = hitWaitTime;
         }
     }
     
-    public void TakeDamage(float damage){
-        OnHit?.Invoke();
+    public void TakeDamage(float damage, GameObject projectile){
+        OnHitWithReference?.Invoke(projectile);
         health -= damage;
         if(health <= 0){
             Destroy(gameObject);

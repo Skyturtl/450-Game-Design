@@ -33,14 +33,17 @@ public class RandomSpawner : MonoBehaviour
         {
             int random = Random.Range(0, 100);
             int randomIndex;
-            if(random < 50){
+            if(random < 100){
                 randomIndex = 0;
             }
-            else if(random < 70){
+            else if(random < 75){
                 randomIndex = 1;
             }
-            else{
+            else if(random < 90){
                 randomIndex = 2;
+            }
+            else{
+                randomIndex = 3;
             }
             Instantiate(enemyPrefabs[randomIndex], SelectSpawnPoint(), Quaternion.identity);
             spawnCounter = timeToSpawn;
