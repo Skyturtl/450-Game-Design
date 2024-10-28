@@ -44,6 +44,13 @@ public class PlayerHealth : MonoBehaviour
         }
         Debug.Log("Healed" + healAmount);
     }
+
+    public void UpdateMaxHealth(float newMaxHealth)
+    {
+        maxHealth = newMaxHealth;
+
+        playerHealth = maxHealth;
+    }
     public void takeDamage(float damage, GameObject sender){
         if(sender.name == "Fork(Clone)"){
             OnHitWithReference?.Invoke(sender);
