@@ -33,7 +33,7 @@ public class RandomSpawner : MonoBehaviour
         {
             int random = Random.Range(0, 100);
             int randomIndex;
-            if(random < 100){
+            if(random < 60){
                 randomIndex = 0;
             }
             else if(random < 75){
