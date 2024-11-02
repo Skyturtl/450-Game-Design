@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -9221547439365541373}
   - component: {fileID: -8474184729414066187}
   - component: {fileID: 7061561324725001812}
+  - component: {fileID: -8813752015263311994}
   - component: {fileID: -2353610898933210490}
   m_Layer: 24
   m_Name: Shark
@@ -381,6 +382,19 @@ PolygonCollider2D:
       - {x: 1.1851572, y: -1.2379128}
       - {x: 1.1656996, y: -1.1357607}
   m_UseDelaunayMesh: 0
+--- !u!114 &-8813752015263311994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8994449388776259908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fd4190a167707348b0db9b4bf6f8b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewAggroDistance: 9
 --- !u!114 &-2353610898933210490
 MonoBehaviour:
   m_ObjectHideFlags: 0
