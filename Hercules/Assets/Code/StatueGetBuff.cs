@@ -11,6 +11,11 @@ public class StatueGetBuff : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Debug.Log("Player entered upgrade zone");
+            Controller playerController = FindObjectOfType<Controller>();
+            if (playerController != null)
+            {
+                playerController.ShowInstructionsFromChest("Click E to upgrade");
+            }
             isPlayerNearby = true;
         }
     }

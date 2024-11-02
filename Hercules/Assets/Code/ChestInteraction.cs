@@ -59,7 +59,11 @@ public class ChestInteraction : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            Debug.Log("Player is near the chest. Press E to open");
+            Controller playerController = FindObjectOfType<Controller>();
+            if (playerController != null)
+            {
+                playerController.ShowInstructionsFromChest("Click E to open the chest");    
+            }
         }
     }
 

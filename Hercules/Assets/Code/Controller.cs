@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Controller : MonoBehaviour
 {
@@ -9,8 +11,7 @@ public class Controller : MonoBehaviour
     public Transform aimPivot;
     SpriteRenderer sprite;
     public float speed;
-
-    Animator animator;
+    public TextMeshProUGUI timerText;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,34 @@ public class Controller : MonoBehaviour
         EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
         InvokeRepeating("Shoot", 0f, 0.25f); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+        StartCoroutine(ShowInstructions("Use WASD to move"));
+    }
+
+    IEnumerator ShowInstructions(string instructions)
+    {
+        timerText.text = instructions;
+        timerText.enabled = true;
+        float displayTime = 3f;
+        float elapsed = 0f;
+
+        while (elapsed < displayTime)
+        {
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Fade out
+        float fadeDuration = 1f;
+        Color originalColor = timerText.color;
+        for (float t = 0; t < fadeDuration; t += Time.deltaTime)
+        {
+            float alpha = Mathf.Lerp(1f, 0f, t / fadeDuration);
+            timerText.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
+        timerText.enabled = false;
+        timerText.color = Color.white;
     }
 
     //Shoot called every half-second
@@ -79,5 +108,10 @@ public class Controller : MonoBehaviour
     public void EnablePlayerMovement(){
         Time.timeScale = 1f;
         enabled = true;
+    }
+
+    public void ShowInstructionsFromChest(string instructions)
+    {
+        StartCoroutine(ShowInstructions(instructions));
     }
 }
