@@ -12,13 +12,15 @@ public class Controller : MonoBehaviour
     SpriteRenderer sprite;
     public float speed;
     public TextMeshProUGUI timerText;
+    private Shoot script;
 
     // Start is called before the first frame update
     void Start()
     {
         EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
-        InvokeRepeating("Shoot", 0f, 0.25f); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+        script = GetComponent<Shoot>();
+        script.Start();
         StartCoroutine(ShowInstructions("Use WASD to move"));
     }
 
@@ -47,15 +49,6 @@ public class Controller : MonoBehaviour
 
         timerText.enabled = false;
         timerText.color = Color.white;
-    }
-
-    //Shoot called every half-second
-    void Shoot()
-    {
-        GameObject newProjectile = Instantiate(projectilePrefab);
-        Vector3 offset = aimPivot.right * 0.5f; // Adjust the offset distance as needed
-        newProjectile.transform.position = transform.position + offset;
-        newProjectile.transform.rotation = aimPivot.rotation;
     }
 
     // Update is called once per frame
