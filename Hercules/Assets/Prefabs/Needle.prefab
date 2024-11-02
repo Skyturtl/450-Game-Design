@@ -10,10 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7177424163608551730}
   - component: {fileID: 246524504166743141}
-  - component: {fileID: 8778352699401641886}
   - component: {fileID: 1305145592298046610}
   - component: {fileID: 64416299461359455}
+  - component: {fileID: 8778352699401641886}
   - component: {fileID: 7474681357029590504}
+  - component: {fileID: 5131352592445319876}
   m_Layer: 24
   m_Name: Needle
   m_TagString: Enemy
@@ -88,41 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8778352699401641886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414473813388573119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnHitWithReference:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 7474681357029590504}
-        m_TargetAssemblyTypeName: Knockback, Assembly-CSharp
-        m_MethodName: PlayFeedback
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  ChaseSpeed: 6
-  AggroDistance: 100
-  StopDistance: 0
-  pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
-    type: 3}
-  damage: 15
-  health: 10
-  hitWaitTime: 1
 --- !u!50 &1305145592298046610
 Rigidbody2D:
   serializedVersion: 4
@@ -195,6 +161,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.860022, y: 2.6074216}
   m_EdgeRadius: 0
+--- !u!114 &8778352699401641886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414473813388573119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e9c8a46061df424a9266079469098be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnHitWithReference:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7474681357029590504}
+        m_TargetAssemblyTypeName: Knockback, Assembly-CSharp
+        m_MethodName: PlayFeedback
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ChaseSpeed: 6
+  AggroDistance: 100
+  StopDistance: 0
+  pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
+    type: 3}
+  damage: 15
+  health: 10
+  hitWaitTime: 1
 --- !u!114 &7474681357029590504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,3 +241,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &5131352592445319876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414473813388573119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290c9f856f0054844a6d0ce443a0de61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewAggroDistance: 9

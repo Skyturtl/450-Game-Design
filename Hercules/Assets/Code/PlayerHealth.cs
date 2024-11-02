@@ -59,12 +59,7 @@ public class PlayerHealth : MonoBehaviour
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);
         if(playerHealth <= 0){
-            // Debug.Log("Player Dead");
             OnPlayerDeath?.Invoke();
-            //Destroy(gameObject);
-            // sprite.enabled = false;
-            // gameObject.GetComponent<Controller>().enabled = false;
-            //prompt game over
         }
     }
 }
