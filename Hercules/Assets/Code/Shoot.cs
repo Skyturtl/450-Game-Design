@@ -4,21 +4,33 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+    public Transform aimPivot;
+    public GameObject projectilePrefab;
+    public float shotSpeed;
 
-    private Controller script;
+    private Animator animator;
+    //private Controller script;
 
     public void Start()
     {
-        script = GetComponent<Controller>();
-        InvokeRepeating("FireProjectile", 0f, 0.25f); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+        animator = GetComponentInParent<Animator>();
+        animator.SetFloat("AttackSpeed", 1 / shotSpeed);
+        //script = GetComponent<Controller>();
+        InvokeRepeating("FireProjectile", 0.1f, shotSpeed); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
 
+   
     //Shoot called every half-second
     void FireProjectile()
     {
-        GameObject newProjectile = Instantiate(script.projectilePrefab);
-        Vector3 offset = script.aimPivot.right * 0.5f; // Adjust the offset distance as needed
-        newProjectile.transform.position = script.transform.position + offset;
-        newProjectile.transform.rotation = script.aimPivot.rotation;
+        GameObject newProjectile = Instantiate(projectilePrefab);
+        Vector3 offset = aimPivot.right * 1.5f; // Adjust the offset distance as needed
+        newProjectile.transform.position = transform.position + offset;
+        newProjectile.transform.rotation = aimPivot.rotation;
+    }
+
+    public void SetAimPivot(Transform pivot)
+    {
+        aimPivot = pivot;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     public GameObject currentWeapon;
+    public Transform aimPivot;
 
     public void PickUpWeapon(GameObject weaponPrefab)
     {
@@ -13,8 +14,16 @@ public class PlayerInventory : MonoBehaviour
             Destroy(currentWeapon);
         }
 
+        
         currentWeapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity);
         currentWeapon.transform.SetParent(transform);
+        Shoot weaponShooting = currentWeapon.GetComponentInChildren<Shoot>();
+        if (weaponShooting != null && aimPivot != null)
+        {
+            Debug.Log("AimPivot set");
+            weaponShooting.SetAimPivot(aimPivot);
+        }
+
     }
     // Start is called before the first frame update
     void Start()

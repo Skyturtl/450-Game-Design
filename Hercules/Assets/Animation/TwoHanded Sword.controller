@@ -15,6 +15,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
+  - m_Name: isFacingRight
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -65,7 +71,7 @@ AnimatorState:
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
-  m_Mirror: 0
+  m_Mirror: 1
   m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
@@ -73,6 +79,6 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 8a9576c2b0d04cd41a387d56c673a024, type: 2}
   m_Tag: 
   m_SpeedParameter: AttackSpeed
-  m_MirrorParameter: 
+  m_MirrorParameter: isFacingRight
   m_CycleOffsetParameter: 
   m_TimeParameter: 
