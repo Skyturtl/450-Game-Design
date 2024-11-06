@@ -7,6 +7,7 @@ public class WeaponPickup : MonoBehaviour
 
     public GameObject weaponPrefab;
     public string playerTag = "Player";
+    
 
     private void OnTriggerEnter2D(Collider2D other)
     {

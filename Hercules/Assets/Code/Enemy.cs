@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class Enemy : MonoBehaviour
 {
     public UnityEvent<GameObject> OnHitWithReference;
-    private Transform target;
+    
     public float ChaseSpeed = 6;
     public float AggroDistance = 12;
     public double StopDistance = 0.5;
@@ -14,8 +14,16 @@ public class Enemy : MonoBehaviour
     public float damage;
     public float health = 10f;
     public float hitWaitTime = 1f;
+    public float dropChance;
+    public GameObject[] weaponList;
+    public Vector3 dropOffset = new Vector3(0.1f, 0.5f, 0);
+
     private float hitCounter;
+    private Transform target;
     SpriteRenderer sprite;
+
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -77,8 +85,16 @@ public class Enemy : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         Upgrade upgrade = player.GetComponent<Upgrade>();
         upgrade.AddKill();
-
+        ItemDrop();
         Destroy(gameObject);
     }
     
+    public void ItemDrop()
+    {
+        if(Random.value <= dropChance)
+        {
+            GameObject weaponToDrop = weaponList[Random.Range(0, weaponList.Length)];
+            Instantiate(weaponToDrop, transform.position + dropOffset, Quaternion.identity);
+        }
+    }
 }

@@ -123,6 +123,10 @@ MonoBehaviour:
   damage: 10
   health: 5
   hitWaitTime: 1
+  dropChance: 0
+  weaponList:
+  - {fileID: 0}
+  dropOffset: {x: 0.1, y: 0.5, z: 0}
 --- !u!50 &-8474184729414066187
 Rigidbody2D:
   serializedVersion: 4

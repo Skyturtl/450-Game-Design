@@ -7,7 +7,8 @@ public class MeleeWeapon : MonoBehaviour
     public Upgrade upgrade;
     public float damage;
     public float swingSpeed;
-
+    private HashSet<GameObject> damagedEnemies = new HashSet<GameObject>();
+    private bool isAttacking = false;
     private Animator animator;
 
     
@@ -16,7 +17,7 @@ public class MeleeWeapon : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
         animator.SetFloat("AttackSpeed", swingSpeed);
-
+        
     }
 
     // Update is called once per frame
@@ -29,13 +30,32 @@ public class MeleeWeapon : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Enemy") && isAttacking)
         {
-            Enemy enemy = collision.GetComponent<Enemy>();
-            if(enemy != null)
+            if (!damagedEnemies.Contains(collision.gameObject))
             {
-                enemy.TakeDamage(damage, gameObject);
+                Enemy enemy = collision.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damage, gameObject);
+                    damagedEnemies.Add(collision.gameObject);
+                    Debug.Log(gameObject + " ‹…À");
+                }
             }
         }
+            
     }
+
+    public void startAttack()
+    {
+        isAttacking = true;
+        damagedEnemies.Clear();
+    }
+
+    public void endAttack()
+    {
+        isAttacking = false;
+    }
+
+    
 }
