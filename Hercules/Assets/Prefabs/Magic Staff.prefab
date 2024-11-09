@@ -217,6 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8379821989653794688}
   - component: {fileID: 7578827360965557215}
+  - component: {fileID: 1486563411886863686}
   m_Layer: 0
   m_Name: Magic Staff
   m_TagString: Untagged
@@ -261,3 +262,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1486563411886863686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7625114509774551343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d57f6201b19864faefa0c04924b8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

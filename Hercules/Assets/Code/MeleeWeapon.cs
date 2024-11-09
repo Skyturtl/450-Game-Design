@@ -39,7 +39,7 @@ public class MeleeWeapon : MonoBehaviour
                 {
                     enemy.TakeDamage(damage, gameObject);
                     damagedEnemies.Add(collision.gameObject);
-                    Debug.Log(gameObject + " ‹…À");
+                    
                 }
             }
         }
