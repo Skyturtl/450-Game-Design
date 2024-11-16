@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - MeleeWeapon
   - Boss
+  - RangedWeapon
   layers:
   - Default
   - TransparentFX

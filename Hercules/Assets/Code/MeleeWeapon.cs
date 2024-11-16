@@ -62,6 +62,7 @@ public class MeleeWeapon : MonoBehaviour
     public void UpdateAttackPower(float newAttackPower)
     {
         damageAmount = newAttackPower + damage;
+        Debug.Log("damage Amount is " + damageAmount);
     }
 
 }

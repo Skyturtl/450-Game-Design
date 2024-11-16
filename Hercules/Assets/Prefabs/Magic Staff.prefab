@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2055311347893605687}
   m_Layer: 0
   m_Name: Magic Staff
-  m_TagString: Untagged
+  m_TagString: RangedWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 5409444353062897449}
   m_Layer: 18
   m_Name: Magic Staff
-  m_TagString: Untagged
+  m_TagString: RangedWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 1486563411886863686}
   m_Layer: 0
   m_Name: Magic Staff
-  m_TagString: Untagged
+  m_TagString: RangedWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

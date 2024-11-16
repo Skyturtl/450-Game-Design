@@ -12,16 +12,20 @@ public class Upgrade : MonoBehaviour
     public float currentHealth;
 
     public int killsPerLevel = 10;
+    public PlayerInventory playerInventory;
+
+    private int weaponType;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        weaponType = checkWeaponType();
     }
 
     public void AddKill()
@@ -52,21 +56,60 @@ public class Upgrade : MonoBehaviour
         {
             playerHealth.UpdateMaxHealth(maxHealth);
         }
+        else
+        {
+            Debug.Log("NO Player Health");
+        }
     }
 
     private void SyncAttackPowerWithPlayer()
     {
-        Projectile projectile = GameObject.FindWithTag("Projectile").GetComponent<Projectile>();
-        MeleeWeapon meleeWeapon = GameObject.FindWithTag("MeleeWeapon").GetComponent<MeleeWeapon>();
+        if(weaponType == 2)
+        {
+            Projectile projectile = GameObject.FindWithTag("Projectile").GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                projectile.UpdateAttackPower(attackPower);
+            }
+        }else if(weaponType == 1)
+        {
+            MeleeWeapon meleeWeapon = GameObject.FindWithTag("Player").GetComponentInChildren<MeleeWeapon>();
 
-        if(projectile != null)
-        {
-            projectile.UpdateAttackPower(attackPower);
+
+
+            if (meleeWeapon != null)
+            {
+                meleeWeapon.UpdateAttackPower(attackPower);
+
+            }
+            else
+            {
+                Debug.Log("No Melee Weapon");
+            }
         }
-        if(meleeWeapon != null)
+        
+        
+    }
+
+    int checkWeaponType()
+    {
+        if(playerInventory.currentWeapon != null)
         {
-            meleeWeapon.UpdateAttackPower(attackPower);
-            
+            if (playerInventory.currentWeapon.CompareTag("MeleeWeapon"))
+            {
+                return 1;
+            }
+            else if (playerInventory.currentWeapon.CompareTag("RangedWeapon")){
+                return 2;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        else
+        {
+            return -1;
         }
     }
 }

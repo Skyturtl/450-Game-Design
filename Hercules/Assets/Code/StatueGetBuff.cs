@@ -38,7 +38,7 @@ public class StatueGetBuff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isPlayerNearby && Input.GetKeyDown(KeyCode.E))
+        if(isPlayerNearby && Input.GetKeyDown(KeyCode.E) && upgrade.KillCount > upgrade.killsPerLevel)
         {
             upgrade.LevelUp();
         }
