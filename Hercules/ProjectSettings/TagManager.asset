@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - Exit
   - MeleeWeapon
+  - Boss
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Boss : MonoBehaviour
     public GameObject hand;
     public float pullRange;
     public float pullIntensity;
+
+    // Boss Health
+    public float bossHealth;
+    public Image healthBar;
 
     public GameObject[] enemyPrefabs;
     private int numEnemies;
@@ -133,6 +138,18 @@ public class Boss : MonoBehaviour
             float x = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
 
             Instantiate(enemyPrefabs[randomIndex], new Vector2(x, y), Quaternion.identity);
+        }
+    }
+    
+    public void takeDamage(float damage)
+    {
+        bossHealth -= damage;
+        healthBar.fillAmount = Mathf.Clamp(bossHealth / 100, 0, 1);
+
+        if (bossHealth <= 0)
+        {
+            //end the game
+            Debug.Log("Boss defeated");
         }
     }
 }

@@ -191,11 +191,15 @@ MonoBehaviour:
   ChaseSpeed: 6
   AggroDistance: 100
   StopDistance: 0
-  pHealth: {fileID: -4909334820351585101, guid: eefb5abca2b33104b97a0a712776903b,
-    type: 3}
+  pHealth: {fileID: 0}
   damage: 15
   health: 10
   hitWaitTime: 1
+  dropChance: 0
+  dropChanceKey: 0
+  weaponList: []
+  key: {fileID: 3427551722334972140, guid: f220febbde9daac448cc3ce91d9ead8e, type: 3}
+  dropOffset: {x: 0.1, y: 0.5, z: 0}
 --- !u!114 &7474681357029590504
 MonoBehaviour:
   m_ObjectHideFlags: 0

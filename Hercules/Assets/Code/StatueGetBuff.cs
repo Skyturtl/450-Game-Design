@@ -14,7 +14,7 @@ public class StatueGetBuff : MonoBehaviour
             Controller playerController = FindObjectOfType<Controller>();
             if (playerController != null)
             {
-                playerController.ShowInstructionsFromChest("Click E to upgrade");
+                playerController.ShowInstructionsInput("Click E to upgrade", Color.white);
             }
             isPlayerNearby = true;
         }

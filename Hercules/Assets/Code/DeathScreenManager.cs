@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class DeathScreenManager : MonoBehaviour
 {
     public GameObject gameOverMenu;
+    private Controller controller;
+
+    private void Start()
+    {
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+    }
 
     private void OnEnable()
     {
@@ -18,6 +24,7 @@ public class DeathScreenManager : MonoBehaviour
     }
     public void OnPlayerDeath()
     {
+        controller.hideInstructions();
         gameOverMenu.SetActive(true);
     }
 

@@ -62,7 +62,7 @@ public class ChestInteraction : MonoBehaviour
             Controller playerController = FindObjectOfType<Controller>();
             if (playerController != null)
             {
-                playerController.ShowInstructionsFromChest("Click E to open the chest");    
+                playerController.ShowInstructionsInput("Click E to open the chest", Color.white);    
             }
         }
     }

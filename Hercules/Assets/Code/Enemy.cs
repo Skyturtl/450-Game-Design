@@ -15,21 +15,20 @@ public class Enemy : MonoBehaviour
     public float health = 10f;
     public float hitWaitTime = 1f;
     public float dropChance;
+    public float dropChanceKey;
     public GameObject[] weaponList;
+    public GameObject key;
+    private GameObject player;
     public Vector3 dropOffset = new Vector3(0.1f, 0.5f, 0);
-
     private float hitCounter;
     private Transform target;
     SpriteRenderer sprite;
-
-    
-
 
     // Start is called before the first frame update
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
     }
 
@@ -67,7 +66,6 @@ public class Enemy : MonoBehaviour
     {
         if(other.gameObject == target.gameObject && hitCounter <= 0f){
             PlayerHealth.instance.takeDamage(damage, gameObject);
-            // SoundManager.instance.PlayBite();
             hitCounter = hitWaitTime;
         }
     }
@@ -82,19 +80,28 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        GameObject player = GameObject.FindWithTag("Player");
         Upgrade upgrade = player.GetComponent<Upgrade>();
         upgrade.AddKill();
-        ItemDrop();
+        if(PlayerPrefs.GetInt("CollectedKeys") != 3 && PlayerPrefs.GetInt("dropped") < 3){ 
+            ItemDrop();
+        }
         Destroy(gameObject);
     }
     
     public void ItemDrop()
     {
-        if(Random.value <= dropChance)
-        {
-            GameObject weaponToDrop = weaponList[Random.Range(0, weaponList.Length)];
-            Instantiate(weaponToDrop, transform.position + dropOffset, Quaternion.identity);
+        // if(Random.value <= dropChance)
+        // {
+        //     GameObject weaponToDrop = weaponList[Random.Range(0, weaponList.Length)];
+        //     Instantiate(weaponToDrop, transform.position + dropOffset, Quaternion.identity);
+        // }
+        if(Random.value <= dropChanceKey)
+        {   
+            PlayerPrefs.SetInt("dropped", PlayerPrefs.GetInt("dropped") + 1);
+            Instantiate(key, transform.position + dropOffset, Quaternion.identity);
+            if(PlayerPrefs.GetInt("CollectedKeys") == 3){
+                dropChanceKey = 0;
+            }
         }
     }
 }

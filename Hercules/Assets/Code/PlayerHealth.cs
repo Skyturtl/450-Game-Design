@@ -58,10 +58,10 @@ public class PlayerHealth : MonoBehaviour
 
         playerHealth = maxHealth;
     }
+    
     public void takeDamage(float damage, GameObject sender){
         if(sender.name == "Fork(Clone)"){
             OnHitWithReference?.Invoke(sender);
-            Debug.Log("FORKED");
         }
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);

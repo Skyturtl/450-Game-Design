@@ -7,11 +7,13 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenu;
     public bool isPaused;
+    private Controller controller;
 
     // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+        controller.hideInstructions();
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -39,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {      
+        controller.showInstructions();
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;

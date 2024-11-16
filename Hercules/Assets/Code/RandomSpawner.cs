@@ -12,12 +12,14 @@ public class RandomSpawner : MonoBehaviour
     private float timePassed = 0;
 
     public Transform minSpawn, maxSpawn;
+    private Controller controller;
 
     // Start is called before the first frame update
     private void Start()
     {
         spawnCounter = initialTimeToSpawn;
         target = PlayerHealth.instance.transform;
+        controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
     }
 
     // Update is called once per frame
@@ -31,6 +33,12 @@ public class RandomSpawner : MonoBehaviour
 
         if (spawnCounter <= 0)
         {
+            if (PlayerPrefs.GetInt("CollectedKeys") == 3)
+            {
+                Instantiate(enemyPrefabs[2], SelectBottomAndSidesSpawn(), Quaternion.identity);
+                spawnCounter = 0.15f;
+                return;
+            }
             int random = Random.Range(0, 100);
             int randomIndex;
             if(random < 60){
@@ -52,37 +60,42 @@ public class RandomSpawner : MonoBehaviour
         transform.position = target.position;
     }
 
-    public Vector3 SelectSpawnPoint()
+    public Vector3 SelectBottomAndSidesSpawn()
     {
         Vector3 spawnPoint = Vector3.zero;
+        int random = Random.Range(0, 2);
 
         bool spawnVerticalEdge = Random.Range(0f, 1f) > 0.5f;
 
         if (spawnVerticalEdge)
         {
-            spawnPoint.y = Random.Range(minSpawn.position.y, maxSpawn.position.y);
-
-            if (Random.Range(0f, 1f) > 0.5f)
-            {
-                spawnPoint.x = minSpawn.position.x;
-            }
-            else
-            {
-                spawnPoint.x = maxSpawn.position.x;
-            }
+            spawnPoint.y = Random.Range(minSpawn.position.y, (maxSpawn.position.y + minSpawn.position.y) / 2);
+            spawnPoint.x = random == 0 ? minSpawn.position.x : maxSpawn.position.x;
         }
         else
         {
             spawnPoint.x = Random.Range(minSpawn.position.x, maxSpawn.position.x);
+            spawnPoint.y = minSpawn.position.y;
+        }
+        return spawnPoint;
+    }
 
-            if (Random.Range(0f, 1f) > 0.5f)
-            {
-                spawnPoint.y = minSpawn.position.y;
-            }
-            else
-            {
-                spawnPoint.y = maxSpawn.position.y;
-            }
+    public Vector3 SelectSpawnPoint()
+    {
+        Vector3 spawnPoint = Vector3.zero;
+
+        bool spawnVerticalEdge = Random.Range(0f, 1f) > 0.5f;
+        int random = Random.Range(0, 2);
+
+        if (spawnVerticalEdge)
+        {
+            spawnPoint.y = Random.Range(minSpawn.position.y, maxSpawn.position.y);
+            spawnPoint.x = random == 0 ? minSpawn.position.x : maxSpawn.position.x;
+        }
+        else
+        {
+            spawnPoint.x = Random.Range(minSpawn.position.x, maxSpawn.position.x);
+            spawnPoint.y = random == 0 ? minSpawn.position.y : maxSpawn.position.y;
         }
         return spawnPoint;
     }

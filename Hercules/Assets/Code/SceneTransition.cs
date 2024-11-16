@@ -16,11 +16,15 @@ public class SceneTransition : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            if (timerUI != null)
+            if(PlayerPrefs.GetInt("CollectedKeys") != 3){
+                other.gameObject.GetComponent<Controller>().ShowInstructionsInput(". . . Hurry . . .", Color.red);
+                return;
+            }
+            else if (timerUI != null)
             {
                 timerUI.SaveTimePassed();
+                SceneManager.LoadScene("Boss Stage");
             }
-            SceneManager.LoadScene("Boss Stage");
         }
     }
 }

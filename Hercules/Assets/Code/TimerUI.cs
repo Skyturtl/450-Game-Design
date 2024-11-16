@@ -15,6 +15,7 @@ public class TimerUI : MonoBehaviour
     public GameObject gameWonMenu;
     public TMP_Text timeTaken;
     private float totalTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +35,10 @@ public class TimerUI : MonoBehaviour
         //Debug.Log("Time Saved: " + PlayerPrefs.GetFloat("TimePassed"));
     }
 
-    public void showWin(){
+    public void showWin()
+    {
+        Controller controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+        controller.hideInstructions();
         timerIsRunning = false;
         gameWonMenu.SetActive(true);
         Time.timeScale = 0f;
