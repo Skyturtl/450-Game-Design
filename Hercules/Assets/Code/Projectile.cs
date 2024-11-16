@@ -5,9 +5,10 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float damageAmount = 5f;
+    public float damage = 1f;
 
     private Upgrade upgrade;
+    private float damageAmount;
     //Outlets
     Rigidbody2D _rigidbody2D;
 
@@ -21,7 +22,7 @@ public class Projectile : MonoBehaviour
 
         if(upgrade != null)
         {
-            damageAmount = upgrade.attackPower;
+            damageAmount = damage + upgrade.attackPower;
         }
     }
     
@@ -38,6 +39,6 @@ public class Projectile : MonoBehaviour
 
     public void UpdateAttackPower(float newAttackPower)
     {
-        damageAmount = newAttackPower;
+        damageAmount = newAttackPower + damage;
     }
 }

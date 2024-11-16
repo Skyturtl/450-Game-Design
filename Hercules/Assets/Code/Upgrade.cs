@@ -35,7 +35,7 @@ public class Upgrade : MonoBehaviour
         Level++;
         KillCount = 0;
 
-        attackPower += 2f;
+        attackPower += 200f;
         maxHealth += 10f;
 
         currentHealth = maxHealth;
@@ -57,9 +57,16 @@ public class Upgrade : MonoBehaviour
     private void SyncAttackPowerWithPlayer()
     {
         Projectile projectile = GameObject.FindWithTag("Projectile").GetComponent<Projectile>();
+        MeleeWeapon meleeWeapon = GameObject.FindWithTag("MeleeWeapon").GetComponent<MeleeWeapon>();
+
         if(projectile != null)
         {
             projectile.UpdateAttackPower(attackPower);
+        }
+        if(meleeWeapon != null)
+        {
+            meleeWeapon.UpdateAttackPower(attackPower);
+            
         }
     }
 }

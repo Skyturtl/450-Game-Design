@@ -7,9 +7,11 @@ public class MeleeWeapon : MonoBehaviour
     public Upgrade upgrade;
     public float damage;
     public float swingSpeed;
+    
     private HashSet<GameObject> damagedEnemies = new HashSet<GameObject>();
     private bool isAttacking = false;
     private Animator animator;
+    private float damageAmount;
 
     
     // Start is called before the first frame update
@@ -17,14 +19,14 @@ public class MeleeWeapon : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
         animator.SetFloat("AttackSpeed", swingSpeed);
-        
+        Upgrade upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
+        damageAmount = damage + upgrade.attackPower;
     }
 
     // Update is called once per frame
     void Update()
     {
-        upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
-        damage += upgrade.attackPower;
+        
         
     }
 
@@ -37,7 +39,7 @@ public class MeleeWeapon : MonoBehaviour
                 Enemy enemy = collision.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damage, gameObject);
+                    enemy.TakeDamage(damageAmount, gameObject);
                     damagedEnemies.Add(collision.gameObject);
                     
                 }
@@ -57,5 +59,9 @@ public class MeleeWeapon : MonoBehaviour
         isAttacking = false;
     }
 
-    
+    public void UpdateAttackPower(float newAttackPower)
+    {
+        damageAmount = newAttackPower + damage;
+    }
+
 }
