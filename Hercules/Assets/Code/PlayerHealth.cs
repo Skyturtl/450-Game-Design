@@ -22,11 +22,18 @@ public class PlayerHealth : MonoBehaviour
     public Image healthBar;
     private SpriteRenderer sprite;
 
+    private int flickerAmount; //https://www.youtube.com/watch?v=a-kPqG7G1Jw
+    private float flickerDuration;
+    private bool takingDamage;
+
     // Start is called before the first frame update
     void Start()
     {
         playerHealth = maxHealth;
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        flickerAmount = 2;
+        flickerDuration = 0.15f;
+        takingDamage = false;
     }
 
     // Update is called once per frame
@@ -58,8 +65,28 @@ public class PlayerHealth : MonoBehaviour
         }
         playerHealth -= damage;
         Debug.Log("Player Health: " + playerHealth);
+
+        if(!takingDamage)
+        {
+            StartCoroutine(Flicker());
+        }
+
         if(playerHealth <= 0){
             OnPlayerDeath?.Invoke();
         }
     }
+
+    IEnumerator Flicker()
+    {
+        takingDamage = true;
+        for (int i = 0; i < flickerAmount; i++)
+        {
+            sprite.color = new Color(1f, 0, 0, 0.5f);
+            yield return new WaitForSeconds(flickerDuration);
+            sprite.color = Color.white;
+            yield return new WaitForSeconds(flickerDuration);
+            takingDamage = false;
+        }
+    }
+
 }

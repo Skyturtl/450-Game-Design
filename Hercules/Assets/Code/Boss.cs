@@ -56,12 +56,12 @@ public class Boss : MonoBehaviour
             //if two, calls attack 2 method
             else if (attackChoice == 2)
             {
-                attackTwo();
+                //attackTwo();
             }
             //if three, calls attack 3 method
             else
             {
-                attackThree();
+               //attackThree();
             }
         }
     }
@@ -108,12 +108,14 @@ public class Boss : MonoBehaviour
 
         //if the location of the player is within the boss's range
         float distance = Vector2.Distance(playerLocation, bossLocation);
+        Debug.Log("distance: " + distance);
 
         //continuously apply a force on the player towards the boss
         //also if the player is within range, call player take damage every second
         if (distance < pullRange)
         {
             Vector2 force = ((bossLocation - playerLocation).normalized / distance) * pullIntensity;
+            Debug.Log("force: " + force);
             playerBody.AddForce(force, ForceMode2D.Force); //IF SOMEONE CAN FIGURE OUT HOW TO GET THIS TO WORK I WILL BE FOREVER IN THEIR DEBT
         }
     }

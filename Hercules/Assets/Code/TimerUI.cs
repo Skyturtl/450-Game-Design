@@ -31,7 +31,7 @@ public class TimerUI : MonoBehaviour
             DisplayTime(timePassed);
         }
 
-        Debug.Log("Time Saved: " + PlayerPrefs.GetFloat("TimePassed"));
+        //Debug.Log("Time Saved: " + PlayerPrefs.GetFloat("TimePassed"));
     }
 
     public void showWin(){
