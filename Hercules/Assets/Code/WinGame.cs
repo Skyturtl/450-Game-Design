@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneTransition : MonoBehaviour
+public class WinGame : MonoBehaviour
 {
     private TimerUI timerUI;
 
@@ -18,9 +18,8 @@ public class SceneTransition : MonoBehaviour
         {
             if (timerUI != null)
             {
-                timerUI.SaveTimePassed();
+                timerUI.showWin();
             }
-            SceneManager.LoadScene("Boss Stage");
         }
     }
 }

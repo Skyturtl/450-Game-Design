@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class TimerUI : MonoBehaviour
@@ -12,24 +13,13 @@ public class TimerUI : MonoBehaviour
     private bool timerIsRunning = false;
     private Collider2D itemCollider;
     public GameObject gameWonMenu;
+    public TMP_Text timeTaken;
+    private float totalTime;
     // Start is called before the first frame update
     void Start()
     {
         //Initialize
         timerIsRunning = true;
-
-        itemCollider = item.GetComponent<Collider2D>();
-
-        if (itemCollider != null)
-        {
-            itemCollider.enabled = true;
-        }
-        else
-        {
-            Debug.LogError("Item does not have a Collider component.");
-
-        }
-        
     }
 
     // Update is called once per frame
@@ -38,24 +28,29 @@ public class TimerUI : MonoBehaviour
         if (timerIsRunning)
         {
             timePassed += Time.deltaTime;
-
             DisplayTime(timePassed);
-
-            // else
-            // {
-            //     timeRemaining = 0;
-            //     timerIsRunning = false;
-
-            //     gameWonMenu.SetActive(true);
-            //     Time.timeScale = 0f;
-            //     enabled = false;
-
-            //     if(itemCollider != null)
-            //     {
-            //         itemCollider.enabled = false;
-            //     }
-            // }
         }
+
+        Debug.Log("Time Saved: " + PlayerPrefs.GetFloat("TimePassed"));
+    }
+
+    public void showWin(){
+        timerIsRunning = false;
+        gameWonMenu.SetActive(true);
+        Time.timeScale = 0f;
+        enabled = false;
+        totalTime = timePassed + PlayerPrefs.GetFloat("TimePassed");
+
+        float min = Mathf.FloorToInt(totalTime / 60);
+        float sec = Mathf.FloorToInt(totalTime % 60);
+
+        timeTaken.text = "Time Taken: " + string.Format("{0:00}:{1:00}", min, sec);
+    }
+
+    public void SaveTimePassed()
+    {
+        PlayerPrefs.SetFloat("TimePassed", timePassed);
+        PlayerPrefs.Save();
     }
 
     void DisplayTime(float timeToDisplay)

@@ -19,8 +19,8 @@ public class Controller : MonoBehaviour
     {
         EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
-        script = GetComponent<Shoot>();
-        script.Start();
+        // script = GetComponent<Shoot>();
+        // script.Start();
         StartCoroutine(ShowInstructions("Use WASD to move"));
     }
 
