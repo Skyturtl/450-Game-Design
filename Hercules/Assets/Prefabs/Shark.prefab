@@ -124,7 +124,7 @@ MonoBehaviour:
   health: 15
   hitWaitTime: 1
   dropChance: 0
-  dropChanceKey: 0
+  dropChanceKey: 0.01
   weaponList: []
   key: {fileID: 3427551722334972140, guid: f220febbde9daac448cc3ce91d9ead8e, type: 3}
   dropOffset: {x: 0.1, y: 0.5, z: 0}
