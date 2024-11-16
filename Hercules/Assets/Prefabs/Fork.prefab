@@ -123,9 +123,9 @@ MonoBehaviour:
   damage: 10
   health: 5
   hitWaitTime: 1
-  dropChance: 0
+  dropChance: 1
   weaponList:
-  - {fileID: 0}
+  - {fileID: 5971210523276652412, guid: 0afad6fa416f6a44aaa76489d5aecfd0, type: 3}
   dropOffset: {x: 0.1, y: 0.5, z: 0}
 --- !u!50 &-8474184729414066187
 Rigidbody2D:
