@@ -35,6 +35,7 @@ public class ChestInteraction : MonoBehaviour
         if (!isOpen)
         {
             Chest.sprite = openChest;
+            SoundManager.instance.PlayChestOpen();
             isOpen = true;
             Debug.Log("Chest Opened");
 

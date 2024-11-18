@@ -32,4 +32,9 @@ public class AttackController : MonoBehaviour
             meleeWeapon.endAttack();
         }
     }
+
+    public bool isMelee()
+    {
+        return meleeWeapon != null;
+    }
 }
