@@ -10,7 +10,6 @@ public class Boss : MonoBehaviour
     //the player
     //the interval between enemy attacks
     public float attackInterval;
-    public GameObject hand;
     public float pullRange;
     public float pullIntensity;
     public int spawnCount;
@@ -20,7 +19,9 @@ public class Boss : MonoBehaviour
     public Image healthBar;
 
     public GameObject[] enemyPrefabs;
+    public GameObject[] handPrefabs;
     private int numEnemies;
+    private int numHands;
 
     private GameObject player;
     private Rigidbody2D playerBody;
@@ -34,7 +35,8 @@ public class Boss : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerTransform = player.transform;
         playerBody = player.GetComponent<Rigidbody2D>();
-        numEnemies = enemyPrefabs.Length - 1;
+        numEnemies = enemyPrefabs.Length;
+        numHands = handPrefabs.Length;
 
         //start coroutine Attack
         StartCoroutine("Attack");
@@ -94,7 +96,10 @@ public class Boss : MonoBehaviour
             if (!(allX.Contains(x)) || !(allY.Contains(y))) //if this exact point isn't already selected
             {
                 //spawn the hand
-                Instantiate(hand, new Vector2(x, y), Quaternion.identity);
+                int randomIndex = Random.Range(0, numHands);
+                Debug.Log(randomIndex);
+
+                Instantiate(handPrefabs[randomIndex], new Vector2(x, y), Quaternion.identity);
 
                 allX.Add(x); //and now no other hand can spawn at this point
                 allY.Add(y);

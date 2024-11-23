@@ -2235,7 +2235,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  playerHealth: 0
+  playerHealth: 100
   maxHealth: 100
   healthBar: {fileID: 0}
 --- !u!114 &1418820159
@@ -11232,9 +11232,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackInterval: 3
-  hand: {fileID: 5879747177264647752, guid: dc93127ea44880540be59b9b10ce8124, type: 3}
   pullRange: 100
   pullIntensity: 100
+  spawnCount: 1
   bossHealth: 200
   healthBar: {fileID: 576795916}
   enemyPrefabs:
@@ -11242,6 +11242,9 @@ MonoBehaviour:
   - {fileID: 8994449388776259908, guid: 0c5b3d98150730540812505abcab8edb, type: 3}
   - {fileID: 8994449388776259908, guid: 36cacab5726c64048a558d9865e12374, type: 3}
   - {fileID: 414473813388573119, guid: 61358a6600777014fa0aa4740bfc9662, type: 3}
+  handPrefabs:
+  - {fileID: 5879747177264647752, guid: dc93127ea44880540be59b9b10ce8124, type: 3}
+  - {fileID: 5879747177264647752, guid: 56abf50cfbe12f04d880b43ddecf4352, type: 3}
 --- !u!50 &1636036858
 Rigidbody2D:
   serializedVersion: 4
