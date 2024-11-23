@@ -6,6 +6,7 @@ public class BossHands : MonoBehaviour
 {
 
     public float lifetime;
+    public float damage;
 
     private float timeElapsed;
 
@@ -24,5 +25,23 @@ public class BossHands : MonoBehaviour
         }
 
         timeElapsed += Time.deltaTime;
+    }
+
+    //deal damage as long as the player continues to collide with the hand
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(DealDamage(other));
+        }
+    }
+
+    private IEnumerator DealDamage(Collision2D other)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            other.gameObject.GetComponent<PlayerHealth>().takeDamage(damage, gameObject);
+        }
     }
 }

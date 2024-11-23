@@ -13,6 +13,7 @@ public class Boss : MonoBehaviour
     public GameObject hand;
     public float pullRange;
     public float pullIntensity;
+    public int spawnCount;
 
     // Boss Health
     public float bossHealth;
@@ -61,12 +62,12 @@ public class Boss : MonoBehaviour
             //if two, calls attack 2 method
             else if (attackChoice == 2)
             {
-                //attackTwo();
+                attackTwo();
             }
             //if three, calls attack 3 method
             else
             {
-               //attackThree();
+                //attackThree();
             }
         }
     }
@@ -120,8 +121,7 @@ public class Boss : MonoBehaviour
         if (distance < pullRange)
         {
             Vector2 force = ((bossLocation - playerLocation).normalized / distance) * pullIntensity;
-            Debug.Log("force: " + force);
-            playerBody.AddForce(force, ForceMode2D.Force); //IF SOMEONE CAN FIGURE OUT HOW TO GET THIS TO WORK I WILL BE FOREVER IN THEIR DEBT
+            playerBody.AddForce(force * 500, ForceMode2D.Force);
         }
     }
 
@@ -130,7 +130,7 @@ public class Boss : MonoBehaviour
     {
         Debug.Log("attack three");
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < spawnCount; i++)
         {
             int randomIndex = Random.Range(0, numEnemies);
 
