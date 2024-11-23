@@ -38,10 +38,7 @@ public class BossHands : MonoBehaviour
 
     private IEnumerator DealDamage(Collision2D other)
     {
-        while (true)
-        {
-            yield return new WaitForSeconds(0.5f);
-            other.gameObject.GetComponent<PlayerHealth>().takeDamage(damage, gameObject);
-        }
+        other.gameObject.GetComponent<PlayerHealth>().takeDamage(damage, gameObject);
+        yield return new WaitForSeconds(0.5f);
     }
 }
