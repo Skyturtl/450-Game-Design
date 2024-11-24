@@ -14,9 +14,9 @@ public class Shoot : MonoBehaviour
     public void Start()
     {
         animator = GetComponentInParent<Animator>();
-        animator.SetFloat("AttackSpeed", 1 / shotSpeed);
+        animator.SetFloat("AttackSpeed", shotSpeed);
         //script = GetComponent<Controller>();
-        InvokeRepeating("FireProjectile", 0.1f, shotSpeed); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
+        InvokeRepeating("FireProjectile", 0.1f, 1/ shotSpeed); //https://docs.unity3d.com/ScriptReference/MonoBehaviour.InvokeRepeating.html
     }
 
    

@@ -74,9 +74,6 @@ public class Upgrade : MonoBehaviour
         }else if(weaponType == 1)
         {
             MeleeWeapon meleeWeapon = GameObject.FindWithTag("Player").GetComponentInChildren<MeleeWeapon>();
-
-
-
             if (meleeWeapon != null)
             {
                 meleeWeapon.UpdateAttackPower(attackPower);
@@ -85,6 +82,19 @@ public class Upgrade : MonoBehaviour
             else
             {
                 Debug.Log("No Melee Weapon");
+            }
+        }else if(weaponType == 3)
+        {
+            Projectile projectile = GameObject.FindWithTag("Projectile").GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                projectile.UpdateAttackPower(attackPower);
+            }
+            MeleeWeapon meleeWeapon = GameObject.FindWithTag("Player").GetComponentInChildren<MeleeWeapon>();
+            if (meleeWeapon != null)
+            {
+                meleeWeapon.UpdateAttackPower(attackPower);
+
             }
         }
         
@@ -101,6 +111,9 @@ public class Upgrade : MonoBehaviour
             }
             else if (playerInventory.currentWeapon.CompareTag("RangedWeapon")){
                 return 2;
+            }else if (playerInventory.currentWeapon.CompareTag("MixedWeapon"))
+            {
+                return 3;
             }
             else
             {
