@@ -5,18 +5,11 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
-    //variables needed:
-    //the boss
-    //the player
-    //the interval between enemy attacks
     public float attackInterval;
     public float pullRange;
     public float pullIntensity;
-    public int spawnCount;
-
-    // Boss Health
-    public float bossHealth;
-    public Image healthBar;
+    public int handSpawnCount;
+    public int mobSpawnCount;
 
     public GameObject[] enemyPrefabs;
     public GameObject[] handPrefabs;
@@ -27,7 +20,10 @@ public class Boss : MonoBehaviour
     private Rigidbody2D playerBody;
     private Transform playerTransform;
 
-    private float time;
+    //DoT Interval Tracking
+    public float damageInterval;
+    public float onContactDamage;
+    private float timePassed;
 
     void Start()
     {
@@ -38,6 +34,8 @@ public class Boss : MonoBehaviour
         numEnemies = enemyPrefabs.Length;
         numHands = handPrefabs.Length;
 
+        timePassed = 0;
+
         //start coroutine Attack
         StartCoroutine("Attack");
     }
@@ -45,6 +43,24 @@ public class Boss : MonoBehaviour
     void Update()
     {
         //update the interval based on the "difficulty" of the boss
+    }
+
+    //on collision stay
+    //if colliding with the player
+    //deal X damage every half second
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Colliding");
+            timePassed += Time.deltaTime;
+            if(timePassed >= damageInterval)
+            {
+                other.gameObject.GetComponent<PlayerHealth>().takeDamage(onContactDamage, gameObject);
+                timePassed = 0;
+                Debug.Log("DoT");
+            }
+        }
     }
 
     private IEnumerator Attack()
@@ -59,7 +75,7 @@ public class Boss : MonoBehaviour
             //if one, calls attack 1 method
             if (attackChoice == 1)
             {
-                attackOne();
+                //attackOne();
             }
             //if two, calls attack 2 method
             else if (attackChoice == 2)
@@ -77,7 +93,7 @@ public class Boss : MonoBehaviour
     //spawn hands
     void attackOne()
     {
-        Debug.Log("attack one");
+        //Debug.Log("attack one");
 
         //pick five random locations on the map
         //make sure that none of them are the same location, or replace them with a new location until all five are unique
@@ -88,7 +104,7 @@ public class Boss : MonoBehaviour
 
         int i = 0;
 
-        while (i < 5) //https://discussions.unity.com/t/instantiating-gameobjects-at-random-screen-positions/633835
+        while (i < handSpawnCount) //https://discussions.unity.com/t/instantiating-gameobjects-at-random-screen-positions/633835
         {
             float y = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
             float x = Random.Range(Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
@@ -97,7 +113,7 @@ public class Boss : MonoBehaviour
             {
                 //spawn the hand
                 int randomIndex = Random.Range(0, numHands);
-                Debug.Log(randomIndex);
+                //Debug.Log(randomIndex);
 
                 Instantiate(handPrefabs[randomIndex], new Vector2(x, y), Quaternion.identity);
 
@@ -119,7 +135,7 @@ public class Boss : MonoBehaviour
 
         //if the location of the player is within the boss's range
         float distance = Vector2.Distance(playerLocation, bossLocation);
-        Debug.Log("distance: " + distance);
+        //Debug.Log("distance: " + distance);
 
         //continuously apply a force on the player towards the boss
         //also if the player is within range, call player take damage every second
@@ -127,15 +143,16 @@ public class Boss : MonoBehaviour
         {
             Vector2 force = ((bossLocation - playerLocation).normalized / distance) * pullIntensity;
             playerBody.AddForce(force * 500, ForceMode2D.Force);
+            playerBody.velocity = new Vector2(0, 0);
         }
     }
 
     //spawn enemies
     void attackThree()
     {
-        Debug.Log("attack three");
+        //Debug.Log("attack three");
 
-        for (int i = 0; i < spawnCount; i++)
+        for (int i = 0; i < mobSpawnCount; i++)
         {
             int randomIndex = Random.Range(0, numEnemies);
 
@@ -148,13 +165,6 @@ public class Boss : MonoBehaviour
     
     public void takeDamage(float damage)
     {
-        bossHealth -= damage;
-        healthBar.fillAmount = Mathf.Clamp(bossHealth / 100, 0, 1);
-
-        if (bossHealth <= 0)
-        {
-            //end the game
-            Debug.Log("Boss defeated");
-        }
+        BossHealth.instance.takeDamage(damage);
     }
 }

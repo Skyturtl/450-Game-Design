@@ -17,6 +17,7 @@ public class SceneTransition : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             if(PlayerPrefs.GetInt("CollectedKeys") != 3){
+                other.gameObject.GetComponent<Controller>().ShowInstructionsInput("...A door has been unlocked...", Color.red);
                 other.gameObject.GetComponent<Controller>().ShowInstructionsInput(". . . Hurry . . .", Color.red);
                 return;
             }

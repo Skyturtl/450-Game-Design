@@ -10,10 +10,16 @@ public class BossHands : MonoBehaviour
 
     private float timeElapsed;
 
+    //DoT
+    public float damageInterval;
+    public float onContactDamage;
+    private float timePassed;
+
     // Start is called before the first frame update
     void Start()
     {
         timeElapsed = 0;
+        timePassed = 0;
     }
 
     // Update is called once per frame
@@ -32,13 +38,13 @@ public class BossHands : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(DealDamage(other));
+            timePassed += Time.deltaTime;
+            if (timePassed >= damageInterval)
+            {
+                other.gameObject.GetComponent<PlayerHealth>().takeDamage(onContactDamage, gameObject);
+                timePassed = 0;
+                Debug.Log("DoT");
+            }
         }
-    }
-
-    private IEnumerator DealDamage(Collision2D other)
-    {
-        other.gameObject.GetComponent<PlayerHealth>().takeDamage(damage, gameObject);
-        yield return new WaitForSeconds(5f);
     }
 }

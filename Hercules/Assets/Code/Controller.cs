@@ -27,7 +27,7 @@ public class Controller : MonoBehaviour
             StartCoroutine(ShowInstructions("Use WASD to move", Color.white));
         }
         else if(SceneManager.GetActiveScene().buildIndex == 2){
-            StartCoroutine(ShowInstructions("Please.. HElp.... Kill me..", Color.red));
+            StartCoroutine(ShowInstructions("Please.. Help.... Kill me..", Color.red));
         }
         PlayerPrefs.SetInt("CollectedKeys", 0);
         PlayerPrefs.SetInt("dropped", 0);
@@ -148,9 +148,4 @@ public class Controller : MonoBehaviour
         PlayerPrefs.SetInt("CollectedKeys", PlayerPrefs.GetInt("CollectedKeys") + 1);
         ShowInstructionsInput("You found a key! " + PlayerPrefs.GetInt("CollectedKeys") + "/3 ...", Color.red);
     }
-
-    // private void ShakeScreen()
-    // {
-    //     Debug.Log("Shake");
-    // } Not sure how to implement help
 }
