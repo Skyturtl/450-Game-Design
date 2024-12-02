@@ -77,25 +77,28 @@ public class Controller : MonoBehaviour
         // {
         //     ShakeScreen();
         // }
+        Vector3 movement = new Vector3();
 
-        if (Input.GetKey(KeyCode.W)) //up
+        if (Input.GetKey(KeyCode.W)) // up
         {
-            transform.position += new Vector3(0, speed * Time.deltaTime, 0);
+            movement.y += speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.S)) //down
+        if (Input.GetKey(KeyCode.S)) // down
         {
-            transform.position += new Vector3(0, -speed * Time.deltaTime, 0);
+            movement.y -= speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.A)) //left
+        if (Input.GetKey(KeyCode.A)) // left
         {
             sprite.flipX = false;
-            transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
+            movement.x -= speed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.D)) //right
+        if (Input.GetKey(KeyCode.D)) // right
         {
             sprite.flipX = true;
-            transform.position += new Vector3(speed * Time.deltaTime, 0, 0);
+            movement.x += speed * Time.deltaTime;
         }
+
+        transform.position += movement.normalized * speed * Time.deltaTime;
 
         //Mouse Aiming
         Vector3 mousePosition = Input.mousePosition;

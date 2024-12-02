@@ -115,7 +115,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  ChaseSpeed: 9
+  ChaseSpeed: 7
   AggroDistance: 100
   StopDistance: 0
   pHealth: {fileID: 0}

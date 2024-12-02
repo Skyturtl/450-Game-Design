@@ -24,10 +24,6 @@ public class SceneTransition : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        
-        timerUI.SaveTimePassed();
-        SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.LoadScene("Boss Stage");
         if (other.gameObject.CompareTag("Player"))
         {
             if(PlayerPrefs.GetInt("CollectedKeys") != 3){

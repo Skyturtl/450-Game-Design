@@ -40,6 +40,7 @@ public class TimerUI : MonoBehaviour
         Controller controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
         controller.hideInstructions();
         timerIsRunning = false;
+        
         gameWonMenu.SetActive(true);
         Time.timeScale = 0f;
         enabled = false;

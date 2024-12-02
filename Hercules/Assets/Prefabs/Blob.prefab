@@ -120,7 +120,7 @@ MonoBehaviour:
   StopDistance: 0
   pHealth: {fileID: 0}
   damage: 5
-  health: 80
+  health: 60
   hitWaitTime: 1
   dropChanceKey: 0.01
   key: {fileID: 3427551722334972140, guid: f220febbde9daac448cc3ce91d9ead8e, type: 3}
