@@ -15,7 +15,9 @@ public class Controller : MonoBehaviour
     public TextMeshProUGUI instructionText;
     private Shoot script;
     private Coroutine instructionCoroutine;
+    private static Controller instance;
 
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -116,6 +118,7 @@ public class Controller : MonoBehaviour
     public void OnDisable()
     {      
         PlayerHealth.OnPlayerDeath -= DisablePlayerMovement;
+        
     }
 
     public void DisablePlayerMovement(){

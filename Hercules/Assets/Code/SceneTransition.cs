@@ -24,8 +24,31 @@ public class SceneTransition : MonoBehaviour
             else if (timerUI != null)
             {
                 timerUI.SaveTimePassed();
+                SceneManager.sceneLoaded += OnSceneLoaded;
                 SceneManager.LoadScene("Boss Stage");
             }
+        }
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Boss Stage")
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player"); 
+            if (player != null)
+            {
+                
+                player.transform.position = new Vector3(-3f, -3f, 0f); 
+            }
+        }
+        if (scene.name == "Game")
+        {
+            if (PlayerManager.instance != null)
+            {
+                Destroy(PlayerManager.instance.player);
+                Destroy(PlayerManager.instance.uiCanvas);
+            }
+
+            SceneManager.sceneLoaded -= OnSceneLoaded;
         }
     }
 }
