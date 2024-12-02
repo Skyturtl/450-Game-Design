@@ -13,6 +13,7 @@ public class Boss : MonoBehaviour
 
     public GameObject[] enemyPrefabs;
     public GameObject[] handPrefabs;
+    public GameObject signPrefab;
     private int numEnemies;
     private int numHands;
 
@@ -75,7 +76,7 @@ public class Boss : MonoBehaviour
             //if one, calls attack 1 method
             if (attackChoice == 1)
             {
-                //attackOne();
+                StartCoroutine(attackOne());
             }
             //if two, calls attack 2 method
             else if (attackChoice == 2)
@@ -85,13 +86,13 @@ public class Boss : MonoBehaviour
             //if three, calls attack 3 method
             else
             {
-                //attackThree();
+                attackThree();
             }
         }
     }
 
     //spawn hands
-    void attackOne()
+    IEnumerator attackOne()
     {
         //Debug.Log("attack one");
 
@@ -111,14 +112,20 @@ public class Boss : MonoBehaviour
 
             if (!(allX.Contains(x)) || !(allY.Contains(y))) //if this exact point isn't already selected
             {
+                GameObject sign = Instantiate(signPrefab, new Vector2(x + 1.4f, y-3), Quaternion.identity);
+                allX.Add(x); //and now no other hand can spawn at this point
+                allY.Add(y);
+                yield return new WaitForSeconds(0.5f);
+
+                Destroy(sign);
+
                 //spawn the hand
                 int randomIndex = Random.Range(0, numHands);
                 //Debug.Log(randomIndex);
 
                 Instantiate(handPrefabs[randomIndex], new Vector2(x, y), Quaternion.identity);
 
-                allX.Add(x); //and now no other hand can spawn at this point
-                allY.Add(y);
+                
 
                 i++;
             }

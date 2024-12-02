@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,8 +9,12 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject player;
     public GameObject uiCanvas;
+    public GameObject SoundManager;
+    
     private void Awake()
     {
+        
+        
         // 检查是否已有一个实例
         if (instance == null)
         {
@@ -21,6 +26,7 @@ public class PlayerManager : MonoBehaviour
             Destroy(gameObject); // 避免重复实例
             return;
         }
+        
 
         // 确保玩家和UI也不会被销毁
         if (player != null)
@@ -31,7 +37,12 @@ public class PlayerManager : MonoBehaviour
         {
             DontDestroyOnLoad(uiCanvas);
         }
+        if (SoundManager != null)
+        {
+            DontDestroyOnLoad(SoundManager);
+        }
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +52,23 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        player = GameObject.FindWithTag("Player");
         
+        uiCanvas = GameObject.FindWithTag("Canvas");
+        SoundManager = GameObject.FindWithTag("SoundManager");
+
+        // 确保玩家和UI也不会被销毁
+        if (player != null)
+        {
+            DontDestroyOnLoad(player);
+        }
+        if (uiCanvas != null)
+        {
+            DontDestroyOnLoad(uiCanvas);
+        }
+        if (SoundManager != null)
+        {
+            DontDestroyOnLoad(SoundManager);
+        }
     }
 }

@@ -34,6 +34,7 @@ public class DeathScreenManager : MonoBehaviour
         {
             Destroy(PlayerManager.instance.player);
             Destroy(PlayerManager.instance.uiCanvas);
+            
         }
         SceneManager.LoadScene(1);
         

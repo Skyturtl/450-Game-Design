@@ -11,6 +11,8 @@ TagManager:
   - Boss
   - RangedWeapon
   - MixedWeapon
+  - Canvas
+  - SoundManager
   layers:
   - Default
   - TransparentFX

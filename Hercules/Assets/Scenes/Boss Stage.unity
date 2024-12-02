@@ -10913,6 +10913,8 @@ MonoBehaviour:
   handPrefabs:
   - {fileID: 5879747177264647752, guid: dc93127ea44880540be59b9b10ce8124, type: 3}
   - {fileID: 5879747177264647752, guid: 56abf50cfbe12f04d880b43ddecf4352, type: 3}
+  signPrefab: {fileID: 6517386977060382025, guid: 20dfd674b91b705409d6a1cd3a4f83ef,
+    type: 3}
   damageInterval: 1
   onContactDamage: 10
 --- !u!50 &1636036858
@@ -14169,7 +14171,7 @@ Transform:
   m_GameObject: {fileID: 1841914337}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.7813909, y: -2.35656, z: -10}
+  m_LocalPosition: {x: -0.4115777, y: -2.15604, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
