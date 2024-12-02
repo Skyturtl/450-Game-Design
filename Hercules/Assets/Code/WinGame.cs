@@ -14,15 +14,12 @@ public class WinGame : MonoBehaviour
         pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
-    void OnCollisionEnter2D(Collision2D other)
+    public void Win()
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (timerUI != null)
         {
-            if (timerUI != null)
-            {
-                timerUI.showWin();
-                pauseMenu.PauseGame();
-            }
+            timerUI.showWin();
+            pauseMenu.PauseGame();
         }
     }
 }

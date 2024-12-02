@@ -16,12 +16,14 @@ public class BossHealth : MonoBehaviour
     public float maxBossHealth;
     public Image healthBar;
     private SpriteRenderer sprite;
+    private WinGame winGame;
 
     // Start is called before the first frame update
     void Start()
     {
         curBossHealth = maxBossHealth;
         sprite = gameObject.GetComponent<SpriteRenderer>();
+        winGame = FindObjectOfType<WinGame>();
     }
 
     // Update is called once per frame
@@ -44,8 +46,9 @@ public class BossHealth : MonoBehaviour
 
         if (curBossHealth <= 0)
         {
-            //end the game
-            Debug.Log("Boss Defeated");
+            winGame.Win();
+            Debug.Log("Boss defeated");
+            Debug.Log(winGame);
         }
     }
 }

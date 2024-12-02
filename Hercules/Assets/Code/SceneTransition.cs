@@ -6,19 +6,32 @@ using UnityEngine.SceneManagement;
 public class SceneTransition : MonoBehaviour
 {
     private TimerUI timerUI;
+    public GameObject portal;
+    public Sprite sprite;
 
     void Start()
     {
         timerUI = FindObjectOfType<TimerUI>();
     }
 
+    void Update()
+    {
+        if(PlayerPrefs.GetInt("CollectedKeys") == 3){
+            SpriteRenderer spriteRenderer = portal.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprite;
+        }
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
+        
+        timerUI.SaveTimePassed();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.LoadScene("Boss Stage");
         if (other.gameObject.CompareTag("Player"))
         {
             if(PlayerPrefs.GetInt("CollectedKeys") != 3){
-                other.gameObject.GetComponent<Controller>().ShowInstructionsInput("...A door has been unlocked...", Color.red);
-                other.gameObject.GetComponent<Controller>().ShowInstructionsInput(". . . Hurry . . .", Color.red);
+                other.gameObject.GetComponent<Controller>().ShowInstructionsInput(".Col .. lct ..... ey", Color.red);
                 return;
             }
             else if (timerUI != null)
