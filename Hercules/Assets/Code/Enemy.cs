@@ -67,6 +67,7 @@ public class Enemy : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         if(other.gameObject == target.gameObject && hitCounter <= 0f){
+            Debug.Log(PlayerHealth.instance);
             PlayerHealth.instance.takeDamage(damage, gameObject);
             SoundManager.instance.PlayBite1();
             hitCounter = hitWaitTime;

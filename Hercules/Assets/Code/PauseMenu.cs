@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public bool isPaused;
     private Controller controller;
     private PlayerInventory playerInventory;
+    private Flipping flipping;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        flipping = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Flipping>();
+        Debug.Log(flipping);
     }
 
     // Update is called once per frame
@@ -41,6 +44,7 @@ public class PauseMenu : MonoBehaviour
         controller.hideInstructions();
         playerInventory.enabled = false;
         controller.enabled = false;
+        flipping.enabled = false;
         Time.timeScale = 0f;
         isPaused = true;
     }
@@ -51,6 +55,7 @@ public class PauseMenu : MonoBehaviour
         controller.showInstructions();
         playerInventory.enabled = true;
         controller.enabled = true;
+        flipping.enabled = true;
         Time.timeScale = 1f;
         isPaused = false;
     }

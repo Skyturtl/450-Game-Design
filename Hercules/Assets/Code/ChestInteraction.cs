@@ -57,7 +57,7 @@ public class ChestInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isOpen == false)
         {
             isPlayerNearby = true;
             Controller playerController = FindObjectOfType<Controller>();

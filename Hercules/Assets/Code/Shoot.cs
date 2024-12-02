@@ -6,7 +6,8 @@ public class Shoot : MonoBehaviour
 {
     public Transform aimPivot;
     public GameObject projectilePrefab;
-    public float adjustedShotSpeed;
+    private float adjustedShotSpeed;
+    private float adjustedSwingSpeed;
     public float shotSpeed;
     public Upgrade upgrade;
     private Animator animator;
@@ -14,15 +15,17 @@ public class Shoot : MonoBehaviour
 
     public void Start()
     {
-        upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
         animator = GetComponentInParent<Animator>();
+        animator.SetFloat("AttackSpeed", shotSpeed);
+        upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
     }
 
     public void Update()
     {
         timePassed += Time.deltaTime;
         adjustedShotSpeed = shotSpeed * upgrade.ShotSpeedMultiplier;
-        animator.SetFloat("AttackSpeed", adjustedShotSpeed);
+        adjustedSwingSpeed = shotSpeed / upgrade.ShotSpeedMultiplier * 2;
+        animator.SetFloat("AttackSpeed", adjustedSwingSpeed);
         if(timePassed > adjustedShotSpeed)
         {
             FireProjectile();
