@@ -10,136 +10,154 @@ public class Upgrade : MonoBehaviour
     public int KillCount = 0;
     private GameObject player;
     private PlayerInventory playerInventory;
+    public GameObject[] weapons;
+    private int weaponIndex = 0;
+
+    // Added values
+    public float bulletDamageAdded;
+    public float bulletSpeedAdded;
+    public float ShotSpeedMultiplier = 1f;
+    public float keyDropChance = 0.01f;
+
     // UI
     public TMP_Text killsText;
-    public Button meleeLeft;
-    public Button meleeRight;
-    public Button meleeMiddle;
+    public TMP_Text speedUpgradeText;
+    public TMP_Text healthUpgradeText;
+    public TMP_Text healthHealText;
+    public TMP_Text bulletSpeedText;
+    public TMP_Text bulletDamageText;
+    public TMP_Text fireRateText;
+    public TMP_Text keyDropText;
+    public TMP_Text weaponNextText;
+    
 
     // prices
-    private int pDamagePrice = 5;
-    private int pSpeedPrice = 3;
-    private int healthPrice = 5;
-    private int speedPrice = 10;
-    private int mDamagePrice = 10;
-    private int mCooldownPrice = 10;
+    private int speedUpgradePrice = 3;
+    private int healthUpgradePrice = 5;
+    private int healthHealPrice = 5;
+    private int bulletSpeedPrice = 10;
+    private int bulletDamagePrice = 10;
+    private int fireRatePrice = 10;
     private int keyDropPrice = 10;
-    private int mPrice = 25;
-
-    // Events
-    public delegate void UpgradeEventHandler();
-    public event UpgradeEventHandler pDamageUpgrade;
-    public event UpgradeEventHandler pSpeedUpgrade;
-    public event UpgradeEventHandler healthUpgrade;
-    public event UpgradeEventHandler healthHeal;
-    public event UpgradeEventHandler speedUpgrade;
-    public event UpgradeEventHandler mPurchase;
-    public event UpgradeEventHandler mDamageUpgrade;
-    public event UpgradeEventHandler mCooldownUpgrade;
-    public event UpgradeEventHandler keyDropUpgrade;
+    private int weaponNextPrice = 25;
 
     void Start()
     {
         player = GameObject.FindWithTag("Player");
         playerInventory = GameObject.FindWithTag("Player").GetComponent<PlayerInventory>();
+        playerInventory.PickUpWeapon(weapons[weaponIndex]);
     }
 
     void Update(){
         killsText.text = "Kills: " + KillCount;
-    }
-
-    public void damageIncrease()
-    {
-        if(KillCount >= pDamagePrice)
-        {
-            pDamageUpgrade?.Invoke();
-            KillCount -= pDamagePrice;
+        speedUpgradeText.text = "Movespeed ++\nKills: " + speedUpgradePrice;
+        healthUpgradeText.text = "Player HP ++\nKills: " + healthUpgradePrice;
+        healthHealText.text = "Heal\nKills: " + healthHealPrice;
+        keyDropText.text = "Key Drop ++\n Kills: " + keyDropPrice;
+        if(weaponIndex == 0){
+            bulletSpeedText.text = "Not Unlocked Yet";
+            bulletDamageText.text = "Swing Dmg ++\nKills: " + bulletDamagePrice;
+            fireRateText.text = "Swing Speed ++\nKills: " + fireRatePrice;
         }
-        pDamagePrice += 5;
+        else{
+            bulletSpeedText.text = "Bullet Speed ++\nKills: " + bulletSpeedPrice;
+            bulletDamageText.text = "Bullet Dmg ++\nKills: " + bulletDamagePrice;
+            fireRateText.text = "Fire Rate\nKills: " + fireRatePrice;            
+        }
+        if(weaponIndex >= weapons.Length - 1)
+        {
+            weaponNextText.text = "Max Weapon!!";
+        }
+        else{
+            weaponNextText.text = "Next Weapon\nKills: " + weaponNextPrice;
+        }
     }
 
     public void speedIncrease()
     {
-        if(KillCount >= pSpeedPrice)
+        if(KillCount >= speedUpgradePrice)
         {
-            pSpeedUpgrade?.Invoke();
-            KillCount -= pSpeedPrice;
+            KillCount -= speedUpgradePrice;
+            speedUpgradePrice += 3;
+            player.GetComponent<Controller>().speed += 1;
         }
-        pSpeedPrice += 3;
     }
 
     public void healthIncrease()
     {
-        if(KillCount >= healthPrice)
+        if(KillCount >= healthUpgradePrice)
         {
-            healthUpgrade?.Invoke();
-            KillCount -= healthPrice;
+            KillCount -= healthUpgradePrice;
+            healthUpgradePrice += 5;
+            player.GetComponent<PlayerHealth>().UpdateMaxHealth(player.GetComponent<PlayerHealth>().maxHealth + 25);
         }
-        healthPrice += 5;
     }
 
-    public void heal()
+    public void healthHealIncrease()
     {
-        if(KillCount >= healthPrice)
+        if(KillCount >= healthHealPrice)
         {
-            healthHeal?.Invoke();
-            KillCount -= healthPrice;
+            KillCount -= healthHealPrice;
+            healthHealPrice += 5;
+            player.GetComponent<PlayerHealth>().heal(50);
         }
-        healthPrice += 5;
     }
 
-    public void speedIncreasePlayer()
+    public void bulletSpeedIncrease()
     {
-        if(KillCount >= speedPrice)
+        if(KillCount >= bulletSpeedPrice && weaponIndex != 0)
         {
-            speedUpgrade?.Invoke();
-            KillCount -= speedPrice;
+            KillCount -= bulletSpeedPrice;
+            bulletSpeedPrice += 10;
+            bulletSpeedAdded += 1f;
         }
-        speedPrice += 10;
     }
 
-    public void mDamageIncrease()
+    public void bulletDamageIncrease()
     {
-        if(KillCount >= mDamagePrice)
+        if(KillCount >= bulletDamagePrice)
         {
-            mDamageUpgrade?.Invoke();
-            KillCount -= mDamagePrice;
+            KillCount -= bulletDamagePrice;
+            bulletDamagePrice += 10;
+            bulletDamageAdded += 5f;
         }
-        mDamagePrice += 10;
     }
 
-    public void mCooldownIncrease()
+    public void fireRateIncrease()
     {
-        if(KillCount >= mCooldownPrice)
+        if(KillCount >= fireRatePrice)
         {
-            mCooldownUpgrade?.Invoke();
-            KillCount -= mCooldownPrice;
+            KillCount -= fireRatePrice;
+            fireRatePrice += 10;
+            ShotSpeedMultiplier *= 0.9f;
         }
-        mCooldownPrice += 10;
     }
-    
+
     public void keyDropIncrease()
     {
         if(KillCount >= keyDropPrice)
         {
-            keyDropUpgrade?.Invoke();
             KillCount -= keyDropPrice;
+            keyDropPrice += 10;
+            keyDropChance *= 2;
         }
-        keyDropPrice += 10;
     }
 
-    public void mBuy()
+    public void weaponNextIncrease()
     {
-        if(KillCount >= mPrice)
+        if(KillCount >= weaponNextPrice)
         {
-            mPurchase?.Invoke();
-            KillCount -= mPrice;
+            KillCount -= weaponNextPrice;
+            weaponNextPrice += 50;        
+            weaponIndex++;
+            playerInventory.PickUpWeapon(weapons[weaponIndex]);
+            if(weaponIndex >= weapons.Length - 1)
+            {
+                weaponNextPrice = 1000000;
+            }
         }
-        meleeLeft.transform.position += new Vector3(0, 0, 0);
-        meleeRight.transform.position += new Vector3(0, 0, 0);
-        meleeMiddle.enabled = false;
     }
-        
+
     public void AddKill()
     {
         KillCount++;
