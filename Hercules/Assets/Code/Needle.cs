@@ -23,7 +23,7 @@ public class Needle : MonoBehaviour
 
         if (distance <= NewAggroDistance)
         {
-            script.ChaseSpeed = 15;
+            script.ChaseSpeed = 12;
         }
     }
 }

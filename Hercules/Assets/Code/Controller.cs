@@ -13,7 +13,6 @@ public class Controller : MonoBehaviour
     SpriteRenderer sprite;
     public float speed;
     public TextMeshProUGUI instructionText;
-    private Shoot script;
     private Coroutine instructionCoroutine;
     private static Controller instance;
 
@@ -23,8 +22,6 @@ public class Controller : MonoBehaviour
     {
         EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
-        // script = GetComponent<Shoot>();
-        // script.Start();
         if(SceneManager.GetActiveScene().buildIndex == 1){
             StartCoroutine(ShowInstructions("Use WASD to move", Color.white));
         }

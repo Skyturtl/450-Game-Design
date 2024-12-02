@@ -257,4 +257,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 290c9f856f0054844a6d0ce443a0de61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewAggroDistance: 9
+  NewAggroDistance: 10

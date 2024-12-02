@@ -5,13 +5,13 @@ using UnityEngine;
 public class MeleeWeapon : MonoBehaviour
 {
     public Upgrade upgrade;
-    public float damage;
+    private float adjustedDamage;
+    private float adjustedSwingSpeed;
+    public float damage = 10f;
     public float swingSpeed;
-    
     private HashSet<GameObject> damagedEnemies = new HashSet<GameObject>();
     private bool isAttacking = false;
     private Animator animator;
-    private float damageAmount;
 
     
     // Start is called before the first frame update
@@ -19,15 +19,14 @@ public class MeleeWeapon : MonoBehaviour
     {
         animator = GetComponentInParent<Animator>();
         animator.SetFloat("AttackSpeed", swingSpeed);
-        Upgrade upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
-        damageAmount = damage + upgrade.attackPower;
+        upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
-        
-        
+        adjustedDamage = damage + upgrade.bulletDamageAdded;
+        adjustedSwingSpeed = swingSpeed / upgrade.ShotSpeedMultiplier;
+        animator.SetFloat("AttackSpeed", adjustedSwingSpeed);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -39,10 +38,9 @@ public class MeleeWeapon : MonoBehaviour
                 Enemy enemy = collision.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(damageAmount, gameObject);
-                    SoundManager.instance.PlaySwordSwing();
+                    enemy.TakeDamage(damage, gameObject);
+                    //SoundManager.instance.PlaySwordSwing();
                     damagedEnemies.Add(collision.gameObject);
-                    
                 }
             }
         }
@@ -59,11 +57,4 @@ public class MeleeWeapon : MonoBehaviour
     {
         isAttacking = false;
     }
-
-    public void UpdateAttackPower(float newAttackPower)
-    {
-        damageAmount = newAttackPower + damage;
-        Debug.Log("damage Amount is " + damageAmount);
-    }
-
 }

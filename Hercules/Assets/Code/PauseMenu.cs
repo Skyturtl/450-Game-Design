@@ -8,12 +8,14 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public bool isPaused;
     private Controller controller;
+    private PlayerInventory playerInventory;
 
     // Start is called before the first frame update
     void Start()
     {
         pauseMenu.SetActive(false);
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
+        playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
     }
 
     // Update is called once per frame
@@ -23,10 +25,12 @@ public class PauseMenu : MonoBehaviour
         {
             if (isPaused)
             {
+                pauseMenu.SetActive(false);
                 ResumeGame();
             }
             else
             {
+                pauseMenu.SetActive(true);
                 PauseGame();
             }
         }
@@ -35,15 +39,18 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         controller.hideInstructions();
-        pauseMenu.SetActive(true);
+        playerInventory.enabled = false;
+        controller.enabled = false;
         Time.timeScale = 0f;
         isPaused = true;
     }
 
     public void ResumeGame()
     {      
-        controller.showInstructions();
         pauseMenu.SetActive(false);
+        controller.showInstructions();
+        playerInventory.enabled = true;
+        controller.enabled = true;
         Time.timeScale = 1f;
         isPaused = false;
     }

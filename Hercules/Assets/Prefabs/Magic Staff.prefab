@@ -206,7 +206,8 @@ MonoBehaviour:
   aimPivot: {fileID: 0}
   projectilePrefab: {fileID: 7564691543182852418, guid: e669bde0801c2544bb69d6c4b1e100f1,
     type: 3}
-  shotSpeed: 2
+  shotSpeed: 0.5
+  upgrade: {fileID: 0}
 --- !u!1 &7625114509774551343
 GameObject:
   m_ObjectHideFlags: 0

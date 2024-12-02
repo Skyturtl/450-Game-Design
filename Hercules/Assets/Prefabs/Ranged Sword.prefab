@@ -147,7 +147,8 @@ MonoBehaviour:
   aimPivot: {fileID: 0}
   projectilePrefab: {fileID: 1416524004843123421, guid: d4c95a1958bfa8b4e921fd384420e526,
     type: 3}
-  shotSpeed: 1.38
+  shotSpeed: 0.75
+  upgrade: {fileID: 0}
 --- !u!61 &2516614407227751658
 BoxCollider2D:
   m_ObjectHideFlags: 0

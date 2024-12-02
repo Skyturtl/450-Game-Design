@@ -10,6 +10,7 @@ public class RandomSpawner : MonoBehaviour
     public float initialTimeToSpawn = 3f;
     private float spawnCounter;
     private float timePassed = 0;
+    private float increaseHealth = 10;
 
     public Transform minSpawn, maxSpawn;
     private Controller controller;
@@ -35,7 +36,9 @@ public class RandomSpawner : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("CollectedKeys") == 3)
             {
-                Instantiate(enemyPrefabs[2], SelectBottomAndSidesSpawn(), Quaternion.identity);
+                Instantiate(enemyPrefabs[4], SelectBottomAndSidesSpawn(), Quaternion.identity);
+                increaseHealth += 5f;
+                enemyPrefabs[4].GetComponent<Enemy>().health = increaseHealth;
                 spawnCounter = 0.15f;
                 return;
             }
