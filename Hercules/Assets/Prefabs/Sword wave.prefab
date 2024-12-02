@@ -126,9 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b8c1ca0f263b7b48a7a5ce37acbf2f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
   maxRange: 10
   ProjectileSpeed: 15
+  adjustedDamage: 0
+  damage: 3
+  bulletVelocity: 15
 --- !u!60 &4660510647049042595
 PolygonCollider2D:
   m_ObjectHideFlags: 0

@@ -14,14 +14,13 @@ public class Enemy : MonoBehaviour
     public float damage;
     public float health = 10f;
     public float hitWaitTime = 1f;
-    public float dropChance;
     public float dropChanceKey;
-    public GameObject[] weaponList;
     public GameObject key;
     private GameObject player;
     public Vector3 dropOffset = new Vector3(0.1f, 0.5f, 0);
     private float hitCounter;
     private Transform target;
+    private Upgrade upgrade;
     SpriteRenderer sprite;
 
     // Start is called before the first frame update
@@ -30,6 +29,7 @@ public class Enemy : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         target = player.transform;
+        upgrade = player.GetComponent<Upgrade>();
     }
 
     // Update is called once per frame
@@ -60,6 +60,8 @@ public class Enemy : MonoBehaviour
         if (hitCounter > 0f){
             hitCounter -= Time.deltaTime;
         }
+
+        dropChanceKey *= upgrade.keyDropChance;
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -88,14 +90,9 @@ public class Enemy : MonoBehaviour
         }
         Destroy(gameObject);
     }
-    
+
     public void ItemDrop()
     {
-        // if(Random.value <= dropChance)
-        // {
-        //     GameObject weaponToDrop = weaponList[Random.Range(0, weaponList.Length)];
-        //     Instantiate(weaponToDrop, transform.position + dropOffset, Quaternion.identity);
-        // }
         if(Random.value <= dropChanceKey)
         {   
             PlayerPrefs.SetInt("dropped", PlayerPrefs.GetInt("dropped") + 1);

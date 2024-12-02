@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class StatueGetBuff : MonoBehaviour
 {
-    public Upgrade upgrade;
+    public GameObject upgrade;
     private bool isPlayerNearby = false;
+    private Controller controller;
+    private bool isUpgrading = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Player entered upgrade zone");
-            Controller playerController = FindObjectOfType<Controller>();
-            if (playerController != null)
+            controller = FindObjectOfType<Controller>();
+            if (controller != null)
             {
-                playerController.ShowInstructionsInput("Click E to upgrade", Color.white);
+                controller.ShowInstructionsInput("Click E to upgrade", Color.white);
             }
             isPlayerNearby = true;
         }
@@ -24,23 +25,37 @@ public class StatueGetBuff : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Exited");
             isPlayerNearby = false;
+            isUpgrading = false;
+            if(upgrade != null){
+                upgrade.SetActive(false);
+            }
+            controller.enabled = true;
+            Time.timeScale = 1f;
         }
     }
-    // Start is called before the first frame update
+
     void Start()
     {
-
-
+        upgrade.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(isPlayerNearby && Input.GetKeyDown(KeyCode.E) && upgrade.KillCount > upgrade.killsPerLevel)
+        if(isPlayerNearby && Input.GetKeyDown(KeyCode.E) && !isUpgrading)
         {
-            upgrade.LevelUp();
+            upgrade.SetActive(true);
+            controller.enabled = false;
+            Time.timeScale = 0f;
+            isUpgrading = true;
+        }
+        else if(isPlayerNearby && Input.GetKeyDown(KeyCode.E) && isUpgrading)
+        {
+            upgrade.SetActive(false);
+            controller.enabled = true;
+            Time.timeScale = 1f;
+            isUpgrading = false;
         }
     }
 }

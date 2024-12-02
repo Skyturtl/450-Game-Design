@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class WinGame : MonoBehaviour
 {
     private TimerUI timerUI;
+    private PauseMenu pauseMenu;
 
     void Start()
     {
         timerUI = FindObjectOfType<TimerUI>();
+        pauseMenu = FindObjectOfType<PauseMenu>();
     }
 
     void OnCollisionEnter2D(Collision2D other)
@@ -19,6 +21,7 @@ public class WinGame : MonoBehaviour
             if (timerUI != null)
             {
                 timerUI.showWin();
+                pauseMenu.PauseGame();
             }
         }
     }

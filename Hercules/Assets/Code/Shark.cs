@@ -22,7 +22,7 @@ public class Shark : MonoBehaviour
     void Update()
     {
         float distance = Vector2.Distance(transform.position, target.position);
-        renderer.material.color = new Color(1f, 1f, 1f, 0.05f);
+        renderer.material.color = new Color(1f, 1f, 1f, 0.1f);
         if (distance <= NewAggroDistance)
         {
             renderer.material.color = Color.white;

@@ -13,7 +13,6 @@ public class Controller : MonoBehaviour
     SpriteRenderer sprite;
     public float speed;
     public TextMeshProUGUI instructionText;
-    private Shoot script;
     private Coroutine instructionCoroutine;
 
     // Start is called before the first frame update
@@ -21,8 +20,6 @@ public class Controller : MonoBehaviour
     {
         EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
-        // script = GetComponent<Shoot>();
-        // script.Start();
         if(SceneManager.GetActiveScene().buildIndex == 1){
             StartCoroutine(ShowInstructions("Use WASD to move", Color.white));
         }

@@ -5,12 +5,13 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    public float damage = 1f;
     public float maxRange;
     public float ProjectileSpeed;
+    public float adjustedDamage;
     private Upgrade upgrade;
-    private float damageAmount;
     private Vector3 startPosition;
+    public float damage;
+    public float bulletVelocity = 15f;
     //Outlets
     Rigidbody2D _rigidbody2D;
 
@@ -21,11 +22,6 @@ public class Projectile : MonoBehaviour
         _rigidbody2D.velocity = transform.right * ProjectileSpeed;
         startPosition = transform.position;
         upgrade = GameObject.FindWithTag("Player").GetComponent<Upgrade>();
-
-        if(upgrade != null)
-        {
-            damageAmount = damage + upgrade.attackPower;
-        }
     }
 
     private void Update()
@@ -36,36 +32,35 @@ public class Projectile : MonoBehaviour
         {
             Destroy(gameObject); 
         }
+        _rigidbody2D.velocity = transform.right * (bulletVelocity + upgrade.bulletSpeedAdded);
+        adjustedDamage = damage + upgrade.bulletDamageAdded;
+        
     }
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.CompareTag("Enemy")){
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount, this.gameObject);
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(adjustedDamage, this.gameObject);
             Rigidbody2D enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
             enemyRigidbody.velocity = Vector2.zero;
         }
         else if(collision.gameObject.CompareTag("Boss"))
         {
-            collision.gameObject.GetComponent<Boss>().takeDamage(damageAmount);
+            collision.gameObject.GetComponent<Boss>().takeDamage(adjustedDamage);
         }
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            collision.gameObject.GetComponent<Enemy>().TakeDamage(damageAmount, this.gameObject);
-            //Rigidbody2D enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
-            //enemyRigidbody.velocity = Vector2.zero;
+        if(collision.gameObject.CompareTag("Enemy")){
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(adjustedDamage, this.gameObject);
+            Rigidbody2D enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
+            enemyRigidbody.velocity = Vector2.zero;
         }
-        else if (collision.gameObject.CompareTag("Boss"))
+        else if(collision.gameObject.CompareTag("Boss"))
         {
-            collision.gameObject.GetComponent<Boss>().takeDamage(damageAmount);
+            collision.gameObject.GetComponent<Boss>().takeDamage(adjustedDamage);
         }
-    }
-    public void UpdateAttackPower(float newAttackPower)
-    {
-        damageAmount = newAttackPower + damage;
     }
 }

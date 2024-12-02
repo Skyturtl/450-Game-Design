@@ -54,9 +54,10 @@ public class PlayerHealth : MonoBehaviour
 
     public void UpdateMaxHealth(float newMaxHealth)
     {
+        int difference = (int)newMaxHealth - (int)maxHealth;
         maxHealth = newMaxHealth;
 
-        playerHealth = maxHealth;
+        playerHealth += difference;
     }
     
     public void takeDamage(float damage, GameObject sender){
@@ -64,7 +65,6 @@ public class PlayerHealth : MonoBehaviour
             OnHitWithReference?.Invoke(sender);
         }
         playerHealth -= damage;
-        Debug.Log("Player Health: " + playerHealth);
 
         if(!takingDamage)
         {
