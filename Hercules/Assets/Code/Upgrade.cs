@@ -35,11 +35,11 @@ public class Upgrade : MonoBehaviour
     private int speedUpgradePrice = 3;
     private int healthUpgradePrice = 5;
     private int healthHealPrice = 5;
-    private int bulletSpeedPrice = 10;
-    private int bulletDamagePrice = 10;
-    private int fireRatePrice = 10;
+    private int bulletSpeedPrice = 8;
+    private int bulletDamagePrice = 8;
+    private int fireRatePrice = 8;
     private int keyDropPrice = 10;
-    private int weaponNextPrice = 25;
+    private int weaponNextPrice = 15;
 
     void Start()
     {
@@ -148,7 +148,7 @@ public class Upgrade : MonoBehaviour
         if(KillCount >= weaponNextPrice)
         {
             KillCount -= weaponNextPrice;
-            weaponNextPrice += 50;        
+            weaponNextPrice = 50;        
             weaponIndex++;
             playerInventory.PickUpWeapon(weapons[weaponIndex]);
             if(weaponIndex >= weapons.Length - 1)
