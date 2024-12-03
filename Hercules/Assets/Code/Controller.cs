@@ -22,10 +22,7 @@ public class Controller : MonoBehaviour
     {
         EnablePlayerMovement();
         sprite = GetComponent<SpriteRenderer>();
-        if(SceneManager.GetActiveScene().buildIndex == 1){
-            StartCoroutine(ShowInstructions("Use WASD to move", Color.white));
-        }
-        else if(SceneManager.GetActiveScene().buildIndex == 2){
+        if(SceneManager.GetActiveScene().buildIndex == 2){
             StartCoroutine(ShowInstructions("Please.. Help.... Kill me..", Color.red));
         }
         PlayerPrefs.SetInt("CollectedKeys", 0);
