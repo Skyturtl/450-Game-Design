@@ -62,6 +62,12 @@ public class PauseMenu : MonoBehaviour
     
     public void RestartGame()
     {
+        if (PlayerManager.instance != null)
+        {
+            Destroy(PlayerManager.instance.player);
+            Destroy(PlayerManager.instance.uiCanvas);
+
+        }
         SceneManager.LoadScene(1);
     }
     
