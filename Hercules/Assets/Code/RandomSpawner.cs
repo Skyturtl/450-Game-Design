@@ -30,7 +30,7 @@ public class RandomSpawner : MonoBehaviour
         spawnCounter -= Time.deltaTime;
 
         // Adjust the timeToSpawn based on timePassed
-        float timeToSpawn = Mathf.Max(0.1f, initialTimeToSpawn - (timePassed / 100));
+        float timeToSpawn = Mathf.Max(0.1f, initialTimeToSpawn - (timePassed / 250));
 
         if (spawnCounter <= 0)
         {

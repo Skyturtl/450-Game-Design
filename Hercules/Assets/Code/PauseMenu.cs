@@ -17,13 +17,14 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-        flipping = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Flipping>();
+        
         Debug.Log(flipping);
     }
 
     // Update is called once per frame
     void Update()
     {
+        flipping = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<Flipping>();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (isPaused)
