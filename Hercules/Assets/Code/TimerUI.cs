@@ -31,8 +31,6 @@ public class TimerUI : MonoBehaviour
             timePassed += Time.deltaTime;
             DisplayTime(timePassed);
         }
-
-        //Debug.Log("Time Saved: " + PlayerPrefs.GetFloat("TimePassed"));
     }
 
     public void showWin()
@@ -44,18 +42,12 @@ public class TimerUI : MonoBehaviour
         gameWonMenu.SetActive(true);
         Time.timeScale = 0f;
         enabled = false;
-        totalTime = timePassed + PlayerPrefs.GetFloat("TimePassed");
+        totalTime = timePassed;
 
         float min = Mathf.FloorToInt(totalTime / 60);
         float sec = Mathf.FloorToInt(totalTime % 60);
 
         timeTaken.text = "Time Taken: " + string.Format("{0:00}:{1:00}", min, sec);
-    }
-
-    public void SaveTimePassed()
-    {
-        PlayerPrefs.SetFloat("TimePassed", timePassed);
-        PlayerPrefs.Save();
     }
 
     void DisplayTime(float timeToDisplay)
