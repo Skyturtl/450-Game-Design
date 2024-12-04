@@ -39,7 +39,7 @@ public class MeleeWeapon : MonoBehaviour
                 if (enemy != null)
                 {
                     enemy.TakeDamage(damage, gameObject);
-                    //SoundManager.instance.PlaySwordSwing();
+                    SoundManager.instance.PlaySwordKill();
                     damagedEnemies.Add(collision.gameObject);
                 }
             }

@@ -43,10 +43,12 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().TakeDamage(adjustedDamage, this.gameObject);
             Rigidbody2D enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
             enemyRigidbody.velocity = Vector2.zero;
+            SoundManager.instance.PlayMagicKill();
         }
         else if(collision.gameObject.CompareTag("Boss"))
         {
             collision.gameObject.GetComponent<Boss>().takeDamage(adjustedDamage);
+            SoundManager.instance.PlayMagicKill();
         }
         Destroy(gameObject);
     }
@@ -57,10 +59,12 @@ public class Projectile : MonoBehaviour
             collision.gameObject.GetComponent<Enemy>().TakeDamage(adjustedDamage, this.gameObject);
             Rigidbody2D enemyRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
             enemyRigidbody.velocity = Vector2.zero;
+            SoundManager.instance.PlayMagicKill();
         }
         else if(collision.gameObject.CompareTag("Boss"))
         {
             collision.gameObject.GetComponent<Boss>().takeDamage(adjustedDamage);
+            SoundManager.instance.PlayMagicKill();
         }
     }
 }
