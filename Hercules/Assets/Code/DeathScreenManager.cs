@@ -8,9 +8,8 @@ public class DeathScreenManager : MonoBehaviour
     public GameObject gameOverMenu;
     private PauseMenu pauseMenu;
     private Controller controller;
-    private float wait = 2000f;
 
-    private void Start()
+    private void FixedUpdate()
     {
         controller = GameObject.FindGameObjectWithTag("Player").GetComponent<Controller>();
         pauseMenu = FindObjectOfType<PauseMenu>();

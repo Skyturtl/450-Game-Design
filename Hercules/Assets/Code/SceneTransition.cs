@@ -9,11 +9,6 @@ public class SceneTransition : MonoBehaviour
     public GameObject portal;
     public Sprite sprite;
 
-    void Start()
-    {
-        timerUI = FindObjectOfType<TimerUI>();
-    }
-
     void Update()
     {
         if(PlayerPrefs.GetInt("CollectedKeys") == 3){
@@ -30,9 +25,7 @@ public class SceneTransition : MonoBehaviour
                 other.gameObject.GetComponent<Controller>().ShowInstructionsInput(".Col .. lct ..... ey", Color.red);
                 return;
             }
-            else if (timerUI != null)
-            {
-                timerUI.SaveTimePassed();
+            else{
                 SceneManager.sceneLoaded += OnSceneLoaded;
                 SceneManager.LoadScene("Boss Stage");
             }
